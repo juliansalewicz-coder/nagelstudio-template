@@ -1,0 +1,62 @@
+{
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\script.js": {
+    "mtime": 1781955980.1926396,
+    "ast_hash": "345baf718281eff588f73213a225690d",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\tests\\calendly.test.mjs": {
+    "mtime": 1781954138.219716,
+    "ast_hash": "4b23d29928056286d0e99badb50c9056",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\tests\\site-hardening.test.mjs": {
+    "mtime": 1781955796.477326,
+    "ast_hash": "a08dcd0dbad148a8cb27a2e8d3fa349c",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\datenschutz.html": {
+    "mtime": 1781955922.9534907,
+    "ast_hash": "d8fbdbbe068613d08baff8166870a8ee",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\impressum.html": {
+    "mtime": 1781955922.9534907,
+    "ast_hash": "f3396b34b0028ce4de7a17d2acd55ea7",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\index.html": {
+    "mtime": 1781955903.69995,
+    "ast_hash": "e4bdce66f3fc748bc6d738b646eef510",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\PRODUCT.md": {
+    "mtime": 1781953616.1124504,
+    "ast_hash": "93dd8c28a81ea1ed98d21a5a3436c648",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\README.md": {
+    "mtime": 1781954214.1361012,
+    "ast_hash": "a89d456007f9c315e796d850cf871619",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\docs\\superpowers\\plans\\2026-06-20-calendly-integration.md": {
+    "mtime": 1781953551.647278,
+    "ast_hash": "22b5156cb91ac785ee165e6c16a9ae31",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\docs\\superpowers\\plans\\2026-06-20-site-hardening.md": {
+    "mtime": 1781955714.2351906,
+    "ast_hash": "1981f8f07e13ffa17ccdc4bb8d472931",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\docs\\superpowers\\specs\\2026-06-20-calendly-integration-design.md": {
+    "mtime": 1781953476.7262146,
+    "ast_hash": "d447865887b908459fa72ed27786877e",
+    "semantic_hash": ""
+  },
+  "C:\\Users\\Julian\\github\\nagelstudio-template\\docs\\superpowers\\specs\\2026-06-20-site-hardening-design.md": {
+    "mtime": 1781955612.2705393,
+    "ast_hash": "91c9a93274b9a00f70ba1d9055d1c01a",
+    "semantic_hash": ""
+  }
+}
