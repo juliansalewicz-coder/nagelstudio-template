@@ -73,33 +73,25 @@ test('mobile navigation exposes its expanded state', () => {
   assert.match(script, /setAttribute\('aria-expanded'/);
 });
 
-test('Calendly fallback changes the live DOM state', () => {
-  const status = { textContent: 'Kalender wird geladen …', classList: { add() {} } };
-  const note = { hidden: true };
+test('the booking button is wired as a no-JS link plus a popup upgrade', () => {
   const context = vm.createContext({
-    document: {
-      addEventListener() {},
-      getElementById(id) {
-        if (id === 'cal-status') return status;
-        if (id === 'cal-fallback-note') return note;
-        return null;
-      },
-    },
-    MutationObserver: class {},
+    document: { addEventListener() {} },
+    window: {},
     setTimeout,
     clearTimeout,
   });
   vm.runInContext(script, context);
 
-  const attributes = new Map();
-  const calendar = {
-    hidden: false,
-    setAttribute(name, value) { attributes.set(name, value); },
+  const listeners = {};
+  const anchor = {
+    href: '',
+    addEventListener(type, fn) { listeners[type] = fn; },
   };
-  context.showCalendlyFallback(calendar);
+  context.bindPopup(anchor, 'https://calendly.com/julian-salewicz/30min');
 
-  assert.equal(calendar.hidden, true);
-  assert.equal(attributes.get('aria-busy'), 'false');
-  assert.equal(status.textContent, 'Kalender konnte nicht geladen werden.');
-  assert.equal(note.hidden, false);
+  // Without JS the anchor is still a working Calendly link, themed to the studio.
+  assert.match(anchor.href, /calendly\.com\/julian-salewicz\/30min/);
+  assert.match(anchor.href, /primary_color=9c7b5b/);
+  // With JS a click handler upgrades it to the in-page popup.
+  assert.equal(typeof listeners.click, 'function');
 });

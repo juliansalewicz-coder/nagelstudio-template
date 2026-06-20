@@ -17,18 +17,18 @@ test('hides generic event details in the studio embed', () => {
   assert.match(script, /hide_event_type_details=1/);
 });
 
-test('loads Calendly only after the widget URL is configured', () => {
+test('loads the Calendly widget script dynamically and opens it as a popup', () => {
   assert.doesNotMatch(html, /assets\.calendly\.com\/assets\/external\/widget\.js/);
-  assert.match(script, /cal\.setAttribute\('data-url'/);
-  assert.match(script, /loadCalendlyScript\(cal/);
+  assert.match(script, /loadCalendlyOnce\s*\(/);
+  assert.match(script, /initPopupWidget/);
 });
 
-test('offers a safe direct booking fallback', () => {
-  assert.match(html, /id="cal-direct"[^>]*target="_blank"[^>]*rel="noopener"/);
-  assert.match(html, /id="cal-fallback-note"/);
+test('the booking button is a real link that works without JavaScript', () => {
+  assert.match(html, /id="cal-popup"[^>]*target="_blank"[^>]*rel="noopener"/);
+  assert.match(html, /id="cal-popup"[^>]*href="https:\/\/calendly\.com\/julian-salewicz\/30min"/);
 });
 
-test('handles a blocked Calendly script', () => {
-  assert.match(script, /calScript\.onerror/);
-  assert.match(script, /showCalendlyFallback/);
+test('only hijacks the click once Calendly has actually loaded', () => {
+  assert.match(script, /window\.Calendly && typeof window\.Calendly\.initPopupWidget === 'function'/);
+  assert.match(script, /event\.preventDefault\(\)/);
 });
