@@ -16,11 +16,15 @@ const STUDIO = {
   hours: ['Mo–Fr: 09:00–19:00', 'Sa: 09:00–16:00', 'So: geschlossen'],
   // Fallback-Calendly-Link (wird genutzt, wenn staff leer ist).
   calendly: 'https://calendly.com/julian-salewicz/30min',
-  // Personen-Auswahl auf der Seite braucht je ein eigenes Calendly-Event
-  // (Calendly Standard, $10/Mt). Aktuell LEER → ein Termin-Button; die Person
-  // wählt die Kundin per Dropdown-Frage IN Calendly (gratis). Zum Aktivieren:
-  //   { name: 'Anna', role: 'Nägel & Gel', calendly: 'https://calendly.com/dein-name/anna' },
-  staff: [],
+  // Personen-Auswahl: Kundin wählt die Kosmetikerin. Demo-Daten — alle zeigen
+  // aufs selbe Event. Für echte, getrennte Verfügbarkeit pro Person je ein
+  // eigenes Calendly-Event anlegen (Calendly Standard) und Link hier eintragen.
+  // Leer lassen ([]) → ein einziger Termin-Button.
+  staff: [
+    { name: 'Sara',  role: 'Nägel & Gel',     calendly: 'https://calendly.com/julian-salewicz/30min' },
+    { name: 'Elena', role: 'Wimpern & Brows',  calendly: 'https://calendly.com/julian-salewicz/30min' },
+    { name: 'Nora',  role: 'Pflege & Waxing',  calendly: 'https://calendly.com/julian-salewicz/30min' },
+  ],
 };
 
 const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
