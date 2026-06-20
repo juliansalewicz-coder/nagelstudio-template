@@ -14,79 +14,103 @@ const STUDIO = {
   instagram: 'https://instagram.com/lunanails',
   facebook: 'https://facebook.com/lunanails',
   hours: ['Mo–Fr: 09:00–19:00', 'Sa: 09:00–16:00', 'So: geschlossen'],
-  // Dein Calendly-Link (Account auf calendly.com anlegen, Event-Typ erstellen, Link hier einsetzen):
+  // Fallback-Calendly-Link (wird genutzt, wenn staff leer ist).
   calendly: 'https://calendly.com/julian-salewicz/30min',
+  // Personen-Auswahl auf der Seite braucht je ein eigenes Calendly-Event
+  // (Calendly Standard, $10/Mt). Aktuell LEER → ein Termin-Button; die Person
+  // wählt die Kundin per Dropdown-Frage IN Calendly (gratis). Zum Aktivieren:
+  //   { name: 'Anna', role: 'Nägel & Gel', calendly: 'https://calendly.com/dein-name/anna' },
+  staff: [],
 };
 
 const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
-const CALENDLY_LOAD_TIMEOUT_MS = 12000;
 
-function showCalendlyFallback(cal) {
-  cal.hidden = true;
-  cal.setAttribute('aria-busy', 'false');
-
-  const status = document.getElementById('cal-status');
-  if (status) {
-    status.textContent = 'Kalender konnte nicht geladen werden.';
-    status.classList.add('is-error');
-  }
-
-  const note = document.getElementById('cal-fallback-note');
-  if (note) note.hidden = false;
+// Calendly-Link mit Studio-Theme (Taupe-Farben, Detail-Panel aus).
+function calendlyUrl(link) {
+  const theme = 'hide_event_type_details=1&primary_color=9c7b5b&background_color=f6f3ee&text_color=322b25';
+  const sep = link.includes('?') ? '&' : '?';
+  return link + sep + theme;
 }
 
-function watchCalendlyWidget(cal) {
-  let timeoutId;
-  let watchedIframe;
-  let settled = false;
-
-  const markReady = () => {
-    if (settled) return;
-    settled = true;
-    clearTimeout(timeoutId);
-    observer.disconnect();
-    cal.setAttribute('aria-busy', 'false');
-    const status = document.getElementById('cal-status');
-    if (status) status.hidden = true;
-  };
-
-  const watchIframe = () => {
-    const iframe = cal.querySelector('iframe');
-    if (!iframe || iframe === watchedIframe) return;
-    watchedIframe = iframe;
-    iframe.addEventListener('load', markReady, { once: true });
-  };
-
-  const observer = new MutationObserver(watchIframe);
-
-  observer.observe(cal, { childList: true, subtree: true });
-  watchIframe();
-  timeoutId = setTimeout(() => {
-    if (settled) return;
-    settled = true;
-    observer.disconnect();
-    watchedIframe?.removeEventListener('load', markReady);
-    showCalendlyFallback(cal);
-  }, CALENDLY_LOAD_TIMEOUT_MS);
-
-  return () => {
-    settled = true;
-    clearTimeout(timeoutId);
-    observer.disconnect();
-    watchedIframe?.removeEventListener('load', markReady);
-  };
+function calendlyReady(link) {
+  return Boolean(link) && !link.includes('DEIN-CALENDLY-LINK');
 }
 
-function loadCalendlyScript(cal) {
-  const stopWatching = watchCalendlyWidget(cal);
+// widget.js nur einmal laden (egal wie viele Buttons).
+function loadCalendlyOnce() {
+  if (document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) return;
   const calScript = document.createElement('script');
   calScript.src = CALENDLY_SCRIPT_SRC;
   calScript.async = true;
-  calScript.onerror = () => {
-    stopWatching();
-    showCalendlyFallback(cal);
-  };
   document.head.append(calScript);
+}
+
+// Öffnet Calendly als Popup-Overlay; ohne JS bleibt der Link normal (neuer Tab).
+function bindPopup(anchor, link) {
+  anchor.href = calendlyUrl(link);
+  anchor.addEventListener('click', event => {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      event.preventDefault();
+      window.Calendly.initPopupWidget({ url: calendlyUrl(link) });
+    }
+  });
+}
+
+// Pro Kosmetikerin eine Karte mit eigenem Termin-Button. Gibt true zurück,
+// wenn mindestens eine gültige Person gerendert wurde.
+function renderStaff(list) {
+  const wrap = document.getElementById('staff-list');
+  if (!wrap) return false;
+  const valid = (list || []).filter(p => calendlyReady(p.calendly));
+  if (!valid.length) return false;
+
+  wrap.replaceChildren(...valid.map(p => {
+    const card = document.createElement('div');
+    card.className = 'staff-card';
+
+    const name = document.createElement('h3');
+    name.className = 'staff-name';
+    name.textContent = p.name;
+
+    const role = document.createElement('p');
+    role.className = 'staff-role';
+    role.textContent = p.role || '';
+
+    const btn = document.createElement('a');
+    btn.className = 'btn';
+    btn.textContent = 'Termin buchen';
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    bindPopup(btn, p.calendly);
+
+    card.append(name, role, btn);
+    return card;
+  }));
+  return true;
+}
+
+// Booking-Bereich: mehrere Personen → Auswahl-Karten; sonst ein Button.
+function setupBooking() {
+  const single = document.getElementById('cal-popup');
+  const staffBlock = document.getElementById('staff-block');
+  const orLine = document.getElementById('booking-or-line');
+
+  const hasStaff = Array.isArray(STUDIO.staff) && renderStaff(STUDIO.staff);
+
+  if (hasStaff) {
+    if (single) single.hidden = true;
+    loadCalendlyOnce();
+    return;
+  }
+
+  if (staffBlock) staffBlock.hidden = true;
+  if (single && calendlyReady(STUDIO.calendly)) {
+    bindPopup(single, STUDIO.calendly);
+    loadCalendlyOnce();
+  } else {
+    if (single) single.hidden = true;
+    if (orLine) orLine.hidden = true;
+  }
 }
 
 function bind() {
@@ -117,26 +141,7 @@ function bind() {
   const map = document.querySelector('#map-frame');
   if (map) map.src = `https://maps.google.com/maps?q=${encodeURIComponent(STUDIO.street + ', ' + STUDIO.zip)}&z=15&output=embed`;
 
-  // Erst Widget konfigurieren, dann Calendly laden. So kann das externe Skript
-  // nicht vor der fertigen data-url starten.
-  const cal = document.getElementById('calendly');
-  const calDirect = document.getElementById('cal-direct');
-  const calReady = STUDIO.calendly && !STUDIO.calendly.includes('DEIN-CALENDLY-LINK');
-  if (calDirect && calReady) calDirect.href = STUDIO.calendly;
-  if (cal) {
-    if (calReady) {
-      const theme = 'hide_event_type_details=1&primary_color=9c7b5b&background_color=f6f3ee&text_color=322b25';
-      const sep = STUDIO.calendly.includes('?') ? '&' : '?';
-      cal.setAttribute('data-url', STUDIO.calendly + sep + theme);
-      cal.setAttribute('aria-busy', 'true');
-      loadCalendlyScript(cal);
-    } else {
-      showCalendlyFallback(cal);
-      if (calDirect) calDirect.hidden = true;
-      const orLine = document.getElementById('booking-or-line');
-      if (orLine) orLine.hidden = true;
-    }
-  }
+  setupBooking();
 }
 
 function imageFallbacks() {

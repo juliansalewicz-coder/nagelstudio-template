@@ -2,7 +2,8 @@
 .DS_Store
 Thumbs.db
 
-# Graphify local cache and machine-specific paths
+# Graphify local cache, machine-specific paths, and pipeline temp files
 graphify-out/cache/
 graphify-out/.graphify_root
 graphify-out/.graphify_python
+graphify-out/.graphify_*.json

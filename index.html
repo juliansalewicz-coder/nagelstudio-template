@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://assets.calendly.com; style-src 'self' https://fonts.googleapis.com https://assets.calendly.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; frame-src https://calendly.com https://maps.google.com; connect-src 'self' https://calendly.com https://*.calendly.com https://fonts.googleapis.com https://fonts.gstatic.com; form-action 'self'; upgrade-insecure-requests" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://assets.calendly.com; style-src 'self' https://fonts.googleapis.com https://assets.calendly.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; frame-src https://calendly.com https://maps.google.com https://www.google.com; connect-src 'self' https://calendly.com https://*.calendly.com https://fonts.googleapis.com https://fonts.gstatic.com; form-action 'self'; upgrade-insecure-requests" />
   <title>Luna Nails & Beauty — Nagelstudio in Zürich | Nägel, Wimpern & Pflege</title>
-  <meta name="description" content="Luna Nails & Beauty in Zürich: saubere Maniküre, Gel-Nägel, Wimpern, Microblading und Pflege in ruhiger Atmosphäre. Termin per WhatsApp, Telefon oder E-Mail anfragen." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%239c7b5b'/><text x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%23f6f3ee' text-anchor='middle'>L</text></svg>" />
+  <meta name="description" content="Luna Nails & Beauty in Zürich: saubere Maniküre, Gel-Nägel, Wimpern, Microblading und Pflege in ruhiger Atmosphäre. Termin online buchen oder per WhatsApp anfragen." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -25,7 +27,7 @@
         <a href="#preise">Preise</a>
         <a href="#warum">Warum wir</a>
         <a href="#kontakt">Kontakt</a>
-        <a href="#termin" class="btn btn-sm">Termin anfragen</a>
+        <a href="#termin" class="btn btn-sm">Termin buchen</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-controls="navLinks" aria-expanded="false">☰</button>
     </div>
@@ -35,7 +37,7 @@
   <section class="hero">
     <div class="hero-text">
       <h1>Dein Beauty-Studio für Nägel, Wimpern &amp; Pflege in Zürich</h1>
-      <p>Gel-Nägel, Maniküre, Wimpern und Pflege — sauber, ruhig und persönlich. Termine einfach per WhatsApp oder Telefon anfragen.</p>
+      <p>Gel-Nägel, Maniküre, Wimpern und Pflege — sauber, ruhig und persönlich. Termine einfach online buchen oder per WhatsApp anfragen.</p>
       <div class="hero-cta">
         <a href="#termin" class="btn">Termin wählen</a>
         <a href="#preise" class="btn btn-outline">Preise ansehen</a>
@@ -89,7 +91,7 @@
           <li>Ruhige Atmosphäre ohne Massenabfertigung</li>
           <li>Termine per WhatsApp, Telefon oder E-Mail</li>
         </ul>
-        <a href="#termin" class="btn">Termin anfragen</a>
+        <a href="#termin" class="btn">Termin buchen</a>
       </div>
     </div>
   </section>
@@ -217,7 +219,7 @@
           <li>Beratung zu Form, Länge und Farbe</li>
           <li>Ruhige Atmosphäre ohne Zeitdruck</li>
           <li>Transparente Preise ohne Überraschungen</li>
-          <li>Flexible Terminvereinbarung per WhatsApp oder Telefon</li>
+          <li>Online buchen oder flexibel per WhatsApp und Telefon</li>
           <li>Sorgfältiges Auffüllen und gepflegte Ergebnisse</li>
         </ul>
       </div>
@@ -233,7 +235,7 @@
     <div class="cta-inner">
       <h2>Bereit für deinen Termin?</h2>
       <p>Schreib uns kurz, welche Behandlung du möchtest — wir finden gemeinsam einen passenden Termin.</p>
-      <a href="#termin" class="btn btn-light">Termin anfragen</a>
+      <a href="#termin" class="btn btn-light">Termin buchen</a>
     </div>
   </section>
 
@@ -243,18 +245,18 @@
       <div class="section-head center-head">
         <span class="eyebrow">Termin</span>
         <h2>Termin buchen</h2>
-        <p>Wähle einen freien Termin direkt im Kalender — du bekommst sofort eine Bestätigung.</p>
+        <p>Buche online in wenigen Klicks — du bekommst sofort eine Bestätigung.</p>
       </div>
 
-      <!-- Die Widget-URL wird vor dem Laden des Calendly-Skripts in script.js gesetzt. -->
-      <p class="calendly-status" id="cal-status" role="status" aria-live="polite">Kalender wird geladen …</p>
-      <div class="calendly-inline-widget" id="calendly" data-url="" aria-label="Calendly-Terminkalender"></div>
-
-      <div class="calendly-fallback" id="cal-fallback-note" hidden>
-        <p>Der Kalender konnte nicht geladen werden. Öffne die Terminwahl direkt bei Calendly oder nutze einen der Kontaktwege darunter.</p>
+      <!-- Personen-Auswahl: pro Kosmetikerin eine Karte (aus STUDIO.staff in script.js). -->
+      <div class="staff-select" id="staff-block">
+        <p class="staff-lead">Wähle deine Kosmetikerin</p>
+        <div class="staff-list" id="staff-list"></div>
       </div>
+
+      <!-- Fallback (nur ein Button), wird genutzt wenn keine Personen gepflegt sind. -->
       <div class="booking-primary-actions">
-        <a class="btn btn-outline" id="cal-direct" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Termin bei Calendly öffnen</a>
+        <a class="btn" id="cal-popup" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Termin online buchen</a>
       </div>
       <p class="booking-or" id="booking-or-line">oder direkt melden</p>
       <div class="booking-actions">
@@ -294,7 +296,7 @@
             <h4>Folge uns</h4>
             <p><a href="https://instagram.com/lunanails" data-ig>Instagram</a> · <a href="https://facebook.com/lunanails" data-fb>Facebook</a></p>
           </div>
-          <a href="#termin" class="btn">Termin anfragen</a>
+          <a href="#termin" class="btn">Termin buchen</a>
         </div>
 
         <div class="find-us">
