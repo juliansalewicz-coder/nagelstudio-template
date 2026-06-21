@@ -51,14 +51,13 @@ test('all images reserve space and below-fold images load lazily', () => {
 });
 
 test('privacy copy names every remote service used by the page', () => {
-  for (const service of ['Calendly', 'Google Fonts', 'Unsplash', 'Google Maps', 'WhatsApp']) {
+  for (const service of ['Google Fonts', 'Unsplash', 'Google Maps', 'WhatsApp']) {
     assert.match(datenschutz, new RegExp(service, 'i'), `privacy copy omits ${service}`);
   }
 });
 
-test('JavaScript avoids HTML injection and does not suppress Calendly privacy UI', () => {
+test('JavaScript avoids HTML injection', () => {
   assert.doesNotMatch(script, /\.innerHTML\s*=/);
-  assert.doesNotMatch(script, /hide_gdpr_banner=1/);
 });
 
 test('CSS respects reduced motion and contains no dead booking selectors', () => {
@@ -73,25 +72,42 @@ test('mobile navigation exposes its expanded state', () => {
   assert.match(script, /setAttribute\('aria-expanded'/);
 });
 
-test('the booking button is wired as a no-JS link plus a popup upgrade', () => {
+test('the booking form builds a prefilled WhatsApp request from its fields', () => {
+  const values = {
+    'bk-service': 'Gel-Nägel',
+    'bk-staff': 'Sara',
+    'bk-date': '2026-06-27',
+    'bk-time': '14:00',
+    'bk-name': 'Test Kundin',
+    'bk-phone': '079 000 00 00',
+  };
+  const handlers = {};
+  const fields = {};
+  for (const [id, value] of Object.entries(values)) fields[id] = { value, min: '', append() {} };
+  fields['booking-form'] = { addEventListener(type, fn) { handlers[type] = fn; } };
+
+  let openedUrl = null;
   const context = vm.createContext({
-    document: { addEventListener() {} },
-    window: {},
+    document: {
+      addEventListener() {},
+      getElementById(id) { return fields[id] ?? null; },
+      createElement() { return {}; },
+    },
+    window: { open(url) { openedUrl = url; } },
+    Date,
     setTimeout,
     clearTimeout,
   });
   vm.runInContext(script, context);
+  context.buildBooking();
 
-  const listeners = {};
-  const anchor = {
-    href: '',
-    addEventListener(type, fn) { listeners[type] = fn; },
-  };
-  context.bindPopup(anchor, 'https://calendly.com/julian-salewicz/30min');
+  assert.equal(typeof handlers.submit, 'function');
+  handlers.submit({ preventDefault() {} });
 
-  // Without JS the anchor is still a working Calendly link, themed to the studio.
-  assert.match(anchor.href, /calendly\.com\/julian-salewicz\/30min/);
-  assert.match(anchor.href, /primary_color=9c7b5b/);
-  // With JS a click handler upgrades it to the in-page popup.
-  assert.equal(typeof listeners.click, 'function');
+  assert.match(openedUrl, /wa\.me\/41781234567/);
+  const decoded = decodeURIComponent(openedUrl);
+  assert.match(decoded, /Behandlung: Gel-Nägel/);
+  assert.match(decoded, /Kosmetikerin: Sara/);
+  assert.match(decoded, /27\.06\.2026 14:00/);
+  assert.match(decoded, /Telefon: 079 000 00 00/);
 });

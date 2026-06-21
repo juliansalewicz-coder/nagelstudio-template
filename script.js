@@ -14,107 +14,79 @@ const STUDIO = {
   instagram: 'https://instagram.com/lunanails',
   facebook: 'https://facebook.com/lunanails',
   hours: ['Mo–Fr: 09:00–19:00', 'Sa: 09:00–16:00', 'So: geschlossen'],
-  // Fallback-Calendly-Link (wird genutzt, wenn staff leer ist).
-  calendly: 'https://calendly.com/julian-salewicz/30min',
-  // Personen-Auswahl: Kundin wählt die Kosmetikerin. Demo-Daten — alle zeigen
-  // aufs selbe Event. Für echte, getrennte Verfügbarkeit pro Person je ein
-  // eigenes Calendly-Event anlegen (Calendly Standard) und Link hier eintragen.
-  // Leer lassen ([]) → ein einziger Termin-Button.
+  // Behandlungen für die Termin-Anfrage. Hinzufügen = eine Zeile ergänzen.
+  services: [
+    'Maniküre',
+    'Gel-Nägel',
+    'Acrylnägel',
+    'Auffüllen',
+    'Wimpern (Lifting / Extensions)',
+    'Augenbrauen / Microblading',
+    'Pflege & Waxing',
+    'Beratung',
+  ],
+  // Kosmetikerinnen. Mitarbeiterin hinzufügen = einfach eine Zeile ergänzen.
   staff: [
-    { name: 'Sara',  role: 'Nägel & Gel',     calendly: 'https://calendly.com/julian-salewicz/30min' },
-    { name: 'Elena', role: 'Wimpern & Brows',  calendly: 'https://calendly.com/julian-salewicz/30min' },
-    { name: 'Nora',  role: 'Pflege & Waxing',  calendly: 'https://calendly.com/julian-salewicz/30min' },
+    { name: 'Sara',  role: 'Nägel & Gel' },
+    { name: 'Elena', role: 'Wimpern & Brows' },
+    { name: 'Nora',  role: 'Pflege & Waxing' },
   ],
 };
 
-const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
+const pad = n => String(n).padStart(2, '0');
+const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
 
-// Calendly-Link mit Studio-Theme (Taupe-Farben, Detail-Panel aus).
-function calendlyUrl(link) {
-  const theme = 'hide_event_type_details=1&primary_color=9c7b5b&background_color=f6f3ee&text_color=322b25';
-  const sep = link.includes('?') ? '&' : '?';
-  return link + sep + theme;
-}
+// Selbst-enthaltene Termin-Anfrage: Behandlung + Kosmetikerin + Wunschtermin
+// + Kontakt → fertige WhatsApp-Nachricht ans Studio. Kein Backend, kein Konto.
+function buildBooking() {
+  const form = document.getElementById('booking-form');
+  if (!form) return;
 
-function calendlyReady(link) {
-  return Boolean(link) && !link.includes('DEIN-CALENDLY-LINK');
-}
-
-// widget.js nur einmal laden (egal wie viele Buttons).
-function loadCalendlyOnce() {
-  if (document.querySelector(`script[src="${CALENDLY_SCRIPT_SRC}"]`)) return;
-  const calScript = document.createElement('script');
-  calScript.src = CALENDLY_SCRIPT_SRC;
-  calScript.async = true;
-  document.head.append(calScript);
-}
-
-// Öffnet Calendly als Popup-Overlay; ohne JS bleibt der Link normal (neuer Tab).
-function bindPopup(anchor, link) {
-  anchor.href = calendlyUrl(link);
-  anchor.addEventListener('click', event => {
-    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      event.preventDefault();
-      window.Calendly.initPopupWidget({ url: calendlyUrl(link) });
-    }
+  // Behandlungen befüllen
+  const service = document.getElementById('bk-service');
+  if (service) STUDIO.services.forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = s;
+    service.append(o);
   });
-}
 
-// Pro Kosmetikerin eine Karte mit eigenem Termin-Button. Gibt true zurück,
-// wenn mindestens eine gültige Person gerendert wurde.
-function renderStaff(list) {
-  const wrap = document.getElementById('staff-list');
-  if (!wrap) return false;
-  const valid = (list || []).filter(p => calendlyReady(p.calendly));
-  if (!valid.length) return false;
+  // Kosmetikerinnen befüllen ("Egal" bleibt als erste Option im HTML)
+  const staff = document.getElementById('bk-staff');
+  if (staff) STUDIO.staff.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.name;
+    o.textContent = p.role ? `${p.name} — ${p.role}` : p.name;
+    staff.append(o);
+  });
 
-  wrap.replaceChildren(...valid.map(p => {
-    const card = document.createElement('div');
-    card.className = 'staff-card';
-
-    const name = document.createElement('h3');
-    name.className = 'staff-name';
-    name.textContent = p.name;
-
-    const role = document.createElement('p');
-    role.className = 'staff-role';
-    role.textContent = p.role || '';
-
-    const btn = document.createElement('a');
-    btn.className = 'btn';
-    btn.textContent = 'Termin buchen';
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-    bindPopup(btn, p.calendly);
-
-    card.append(name, role, btn);
-    return card;
-  }));
-  return true;
-}
-
-// Booking-Bereich: mehrere Personen → Auswahl-Karten; sonst ein Button.
-function setupBooking() {
-  const single = document.getElementById('cal-popup');
-  const staffBlock = document.getElementById('staff-block');
-  const orLine = document.getElementById('booking-or-line');
-
-  const hasStaff = Array.isArray(STUDIO.staff) && renderStaff(STUDIO.staff);
-
-  if (hasStaff) {
-    if (single) single.hidden = true;
-    loadCalendlyOnce();
-    return;
+  // Zeit-Slots 09:00–18:30 in 30-Min-Schritten
+  const time = document.getElementById('bk-time');
+  if (time) for (let h = 9; h <= 18; h++) for (const m of ['00', '30']) {
+    const t = `${pad(h)}:${m}`;
+    const o = document.createElement('option');
+    o.value = t; o.textContent = t;
+    time.append(o);
   }
 
-  if (staffBlock) staffBlock.hidden = true;
-  if (single && calendlyReady(STUDIO.calendly)) {
-    bindPopup(single, STUDIO.calendly);
-    loadCalendlyOnce();
-  } else {
-    if (single) single.hidden = true;
-    if (orLine) orLine.hidden = true;
-  }
+  // Datum frühestens heute (lokal gerechnet → kein Zeitzonen-Versatz)
+  const date = document.getElementById('bk-date');
+  if (date) date.min = todayISO();
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const val = id => (document.getElementById(id)?.value || '').trim();
+    const iso = val('bk-date');
+    const datePretty = iso ? iso.split('-').reverse().join('.') : '';
+    const message = [
+      `Hallo ${STUDIO.name}, ich möchte gerne einen Termin anfragen:`,
+      `• Behandlung: ${val('bk-service')}`,
+      `• Kosmetikerin: ${val('bk-staff') || 'egal, wer frei ist'}`,
+      `• Wunschtermin: ${`${datePretty} ${val('bk-time')}`.trim()}`,
+      `• Name: ${val('bk-name')}`,
+      `• Telefon: ${val('bk-phone')}`,
+    ].join('\n');
+    window.open(`https://wa.me/${STUDIO.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  });
 }
 
 function bind() {
@@ -145,7 +117,7 @@ function bind() {
   const map = document.querySelector('#map-frame');
   if (map) map.src = `https://maps.google.com/maps?q=${encodeURIComponent(STUDIO.street + ', ' + STUDIO.zip)}&z=15&output=embed`;
 
-  setupBooking();
+  buildBooking();
 }
 
 function imageFallbacks() {
