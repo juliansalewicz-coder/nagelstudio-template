@@ -5,46 +5,31 @@
     "hyperedges": [
       {
         "id": "booking_flow",
-        "label": "Calendly booking flow",
+        "label": "Self-contained WhatsApp booking flow",
         "nodes": [
-          "script_setupBooking",
-          "script_renderStaff",
-          "script_bindPopup",
-          "script_loadCalendlyOnce",
-          "index_termin_section"
+          "index_bookingForm",
+          "script_buildBooking",
+          "script_STUDIO",
+          "concept_whatsappBooking"
         ],
         "relation": "participate_in",
-        "confidence": "EXTRACTED",
+        "confidence": "INFERRED",
         "confidence_score": 0.85,
         "source_file": "script.js"
       },
       {
-        "id": "csp_hardening",
-        "label": "Cross-page CSP hardening",
+        "id": "hardening_contracts",
+        "label": "Site hardening contract enforcement",
         "nodes": [
+          "hardeningtest_suite",
           "index_csp",
-          "impressum_csp",
-          "datenschutz_csp",
-          "hardening_spec_csp"
+          "hardspec_doc",
+          "hardplan_doc"
         ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md"
-      },
-      {
-        "id": "fallback_resilience",
-        "label": "External-service fallback resilience",
-        "nodes": [
-          "product_fallback_principle",
-          "calendly_spec_fallback",
-          "calendly_plan_deterministic_loading",
-          "datenschutz_thirdparty_disclosure"
-        ],
-        "relation": "participate_in",
+        "relation": "implement",
         "confidence": "INFERRED",
         "confidence_score": 0.75,
-        "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md"
+        "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md"
       }
     ]
   },
@@ -68,64 +53,37 @@
       "norm_label": "studio"
     },
     {
-      "label": "calendlyUrl()",
+      "label": "pad()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L29",
-      "id": "nagelstudio_template_script_calendlyurl",
+      "source_location": "L36",
+      "id": "nagelstudio_template_script_pad",
       "community": 1,
-      "norm_label": "calendlyurl()"
+      "norm_label": "pad()"
     },
     {
-      "label": "calendlyReady()",
+      "label": "todayISO()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L35",
-      "id": "nagelstudio_template_script_calendlyready",
+      "source_location": "L37",
+      "id": "nagelstudio_template_script_todayiso",
       "community": 1,
-      "norm_label": "calendlyready()"
+      "norm_label": "todayiso()"
     },
     {
-      "label": "loadCalendlyOnce()",
+      "label": "buildBooking()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L40",
-      "id": "nagelstudio_template_script_loadcalendlyonce",
+      "source_location": "L41",
+      "id": "nagelstudio_template_script_buildbooking",
       "community": 1,
-      "norm_label": "loadcalendlyonce()"
-    },
-    {
-      "label": "bindPopup()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": "L49",
-      "id": "nagelstudio_template_script_bindpopup",
-      "community": 1,
-      "norm_label": "bindpopup()"
-    },
-    {
-      "label": "renderStaff()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": "L61",
-      "id": "nagelstudio_template_script_renderstaff",
-      "community": 1,
-      "norm_label": "renderstaff()"
-    },
-    {
-      "label": "setupBooking()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": "L93",
-      "id": "nagelstudio_template_script_setupbooking",
-      "community": 1,
-      "norm_label": "setupbooking()"
+      "norm_label": "buildbooking()"
     },
     {
       "label": "bind()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L116",
+      "source_location": "L92",
       "id": "nagelstudio_template_script_bind",
       "community": 1,
       "norm_label": "bind()"
@@ -134,7 +92,7 @@
       "label": "imageFallbacks()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L147",
+      "source_location": "L123",
       "id": "nagelstudio_template_script_imagefallbacks",
       "community": 1,
       "norm_label": "imagefallbacks()"
@@ -143,19 +101,19 @@
       "label": "nav()",
       "file_type": "code",
       "source_file": "script.js",
-      "source_location": "L155",
+      "source_location": "L131",
       "id": "nagelstudio_template_script_nav",
       "community": 1,
       "norm_label": "nav()"
     },
     {
-      "label": "calendly.test.mjs",
+      "label": "booking.test.mjs",
       "file_type": "code",
-      "source_file": "tests/calendly.test.mjs",
+      "source_file": "tests/booking.test.mjs",
       "source_location": "L1",
-      "id": "tests_calendly_test_mjs",
-      "community": 9,
-      "norm_label": "calendly.test.mjs"
+      "id": "tests_booking_test_mjs",
+      "community": 7,
+      "norm_label": "booking.test.mjs"
     },
     {
       "label": "site-hardening.test.mjs",
@@ -163,7 +121,7 @@
       "source_file": "tests/site-hardening.test.mjs",
       "source_location": "L1",
       "id": "tests_site_hardening_test_mjs",
-      "community": 2,
+      "community": 0,
       "norm_label": "site-hardening.test.mjs"
     },
     {
@@ -172,7 +130,7 @@
       "source_file": "tests/site-hardening.test.mjs",
       "source_location": "L6",
       "id": "tests_site_hardening_test_read",
-      "community": 2,
+      "community": 0,
       "norm_label": "read()"
     },
     {
@@ -181,53 +139,80 @@
       "source_file": "tests/site-hardening.test.mjs",
       "source_location": "L15",
       "id": "tests_site_hardening_test_pages",
-      "community": 2,
+      "community": 0,
       "norm_label": "pages"
     },
     {
-      "label": "status",
+      "label": "values",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L77",
-      "id": "tests_site_hardening_test_status",
-      "community": 2,
-      "norm_label": "status"
+      "source_location": "L76",
+      "id": "tests_site_hardening_test_values",
+      "community": 0,
+      "norm_label": "values"
     },
     {
-      "label": "note",
+      "label": "handlers",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L78",
-      "id": "tests_site_hardening_test_note",
-      "community": 2,
-      "norm_label": "note"
+      "source_location": "L84",
+      "id": "tests_site_hardening_test_handlers",
+      "community": 0,
+      "norm_label": "handlers"
+    },
+    {
+      "label": "fields",
+      "file_type": "code",
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L85",
+      "id": "tests_site_hardening_test_fields",
+      "community": 0,
+      "norm_label": "fields"
+    },
+    {
+      "label": "append()",
+      "file_type": "code",
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L86",
+      "id": "tests_site_hardening_test_append",
+      "community": 0,
+      "norm_label": "append()"
+    },
+    {
+      "label": "addEventListener()",
+      "file_type": "code",
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L87",
+      "id": "tests_site_hardening_test_addeventlistener",
+      "community": 0,
+      "norm_label": "addeventlistener()"
     },
     {
       "label": "context",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L79",
+      "source_location": "L90",
       "id": "tests_site_hardening_test_context",
-      "community": 2,
+      "community": 0,
       "norm_label": "context"
     },
     {
-      "label": "attributes",
+      "label": "preventDefault()",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L94",
-      "id": "tests_site_hardening_test_attributes",
-      "community": 2,
-      "norm_label": "attributes"
+      "source_location": "L105",
+      "id": "tests_site_hardening_test_preventdefault",
+      "community": 0,
+      "norm_label": "preventdefault()"
     },
     {
-      "label": "calendar",
+      "label": "decoded",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L95",
-      "id": "tests_site_hardening_test_calendar",
-      "community": 2,
-      "norm_label": "calendar"
+      "source_location": "L108",
+      "id": "tests_site_hardening_test_decoded",
+      "community": 0,
+      "norm_label": "decoded"
     },
     {
       "label": "STUDIO config object",
@@ -239,11 +224,11 @@
       "author": null,
       "contributor": null,
       "id": "script_STUDIO",
-      "community": 0,
+      "community": 3,
       "norm_label": "studio config object"
     },
     {
-      "label": "calendlyUrl()",
+      "label": "buildBooking()",
       "file_type": "code",
       "source_file": "script.js",
       "source_location": null,
@@ -251,12 +236,12 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "script_calendlyUrl",
-      "community": 0,
-      "norm_label": "calendlyurl()"
+      "id": "script_buildBooking",
+      "community": 4,
+      "norm_label": "buildbooking()"
     },
     {
-      "label": "calendlyReady()",
+      "label": "todayISO()",
       "file_type": "code",
       "source_file": "script.js",
       "source_location": null,
@@ -264,12 +249,12 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "script_calendlyReady",
-      "community": 0,
-      "norm_label": "calendlyready()"
+      "id": "script_todayISO",
+      "community": 4,
+      "norm_label": "todayiso()"
     },
     {
-      "label": "loadCalendlyOnce()",
+      "label": "pad()",
       "file_type": "code",
       "source_file": "script.js",
       "source_location": null,
@@ -277,48 +262,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "script_loadCalendlyOnce",
-      "community": 0,
-      "norm_label": "loadcalendlyonce()"
-    },
-    {
-      "label": "bindPopup()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "script_bindPopup",
-      "community": 0,
-      "norm_label": "bindpopup()"
-    },
-    {
-      "label": "renderStaff()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "script_renderStaff",
-      "community": 0,
-      "norm_label": "renderstaff()"
-    },
-    {
-      "label": "setupBooking()",
-      "file_type": "code",
-      "source_file": "script.js",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "script_setupBooking",
-      "community": 0,
-      "norm_label": "setupbooking()"
+      "id": "script_pad",
+      "community": 4,
+      "norm_label": "pad()"
     },
     {
       "label": "bind()",
@@ -356,64 +302,25 @@
       "author": null,
       "contributor": null,
       "id": "script_nav",
-      "community": 3,
+      "community": 2,
       "norm_label": "nav()"
     },
     {
-      "label": "DOMContentLoaded bootstrap",
+      "label": "Booking form (#booking-form)",
       "file_type": "code",
-      "source_file": "script.js",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "script_domcontentloaded",
-      "community": 3,
-      "norm_label": "domcontentloaded bootstrap"
-    },
-    {
-      "label": "index.html landing page",
-      "file_type": "document",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_html",
-      "community": 5,
-      "norm_label": "index.html landing page"
+      "id": "index_bookingForm",
+      "community": 4,
+      "norm_label": "booking form (#booking-form)"
     },
     {
-      "label": "data-* field bindings",
-      "file_type": "document",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "index_data_field_bindings",
-      "community": 3,
-      "norm_label": "data-* field bindings"
-    },
-    {
-      "label": "#termin booking section",
-      "file_type": "document",
-      "source_file": "index.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "index_termin_section",
-      "community": 0,
-      "norm_label": "#termin booking section"
-    },
-    {
-      "label": "index.html Content Security Policy",
-      "file_type": "document",
+      "label": "Content Security Policy (index)",
+      "file_type": "code",
       "source_file": "index.html",
       "source_location": null,
       "source_url": null,
@@ -421,89 +328,63 @@
       "author": null,
       "contributor": null,
       "id": "index_csp",
-      "community": 6,
-      "norm_label": "index.html content security policy"
+      "community": 2,
+      "norm_label": "content security policy (index)"
     },
     {
-      "label": "impressum.html legal page",
-      "file_type": "document",
-      "source_file": "impressum.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "impressum_html",
-      "community": 6,
-      "norm_label": "impressum.html legal page"
-    },
-    {
-      "label": "impressum.html Content Security Policy",
-      "file_type": "document",
-      "source_file": "impressum.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "impressum_csp",
-      "community": 6,
-      "norm_label": "impressum.html content security policy"
-    },
-    {
-      "label": "datenschutz.html privacy page",
-      "file_type": "document",
-      "source_file": "datenschutz.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "datenschutz_html",
-      "community": 8,
-      "norm_label": "datenschutz.html privacy page"
-    },
-    {
-      "label": "datenschutz.html Content Security Policy",
-      "file_type": "document",
-      "source_file": "datenschutz.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "datenschutz_csp",
-      "community": 6,
-      "norm_label": "datenschutz.html content security policy"
-    },
-    {
-      "label": "Third-party service disclosure",
-      "file_type": "document",
-      "source_file": "datenschutz.html",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "datenschutz_thirdparty_disclosure",
-      "community": 8,
-      "norm_label": "third-party service disclosure"
-    },
-    {
-      "label": "calendly.test.mjs",
+      "label": "data-* binding attributes",
       "file_type": "code",
-      "source_file": "tests/calendly.test.mjs",
+      "source_file": "index.html",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "calendly_test",
-      "community": 5,
-      "norm_label": "calendly.test.mjs"
+      "id": "index_dataBindings",
+      "community": 3,
+      "norm_label": "data-* binding attributes"
     },
     {
-      "label": "site-hardening.test.mjs",
+      "label": "Google Maps iframe (#map-frame)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_mapFrame",
+      "community": 3,
+      "norm_label": "google maps iframe (#map-frame)"
+    },
+    {
+      "label": "Mobile nav toggle (#navToggle)",
+      "file_type": "code",
+      "source_file": "index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "index_navToggle",
+      "community": 2,
+      "norm_label": "mobile nav toggle (#navtoggle)"
+    },
+    {
+      "label": "Booking form tests",
+      "file_type": "code",
+      "source_file": "tests/booking.test.mjs",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "bookingtest_suite",
+      "community": 4,
+      "norm_label": "booking form tests"
+    },
+    {
+      "label": "Site hardening tests",
       "file_type": "code",
       "source_file": "tests/site-hardening.test.mjs",
       "source_location": null,
@@ -511,12 +392,38 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_test",
-      "community": 8,
-      "norm_label": "site-hardening.test.mjs"
+      "id": "hardeningtest_suite",
+      "community": 2,
+      "norm_label": "site hardening tests"
     },
     {
-      "label": "PRODUCT.md product brief",
+      "label": "Datenschutzerkl\u00e4rung",
+      "file_type": "document",
+      "source_file": "datenschutz.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "datenschutz_doc",
+      "community": 2,
+      "norm_label": "datenschutzerklarung"
+    },
+    {
+      "label": "Impressum",
+      "file_type": "document",
+      "source_file": "impressum.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "impressum_doc",
+      "community": 3,
+      "norm_label": "impressum"
+    },
+    {
+      "label": "Product brief",
       "file_type": "document",
       "source_file": "PRODUCT.md",
       "source_location": null,
@@ -524,38 +431,25 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "product_md",
-      "community": 7,
-      "norm_label": "product.md product brief"
+      "id": "product_doc",
+      "community": 6,
+      "norm_label": "product brief"
     },
     {
-      "label": "Design principles (Vertrauen vor Effekt)",
-      "file_type": "rationale",
+      "label": "Booking without backend principle",
+      "file_type": "document",
       "source_file": "PRODUCT.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "product_design_principles",
-      "community": 7,
-      "norm_label": "design principles (vertrauen vor effekt)"
+      "id": "product_bookingNoBackend",
+      "community": 6,
+      "norm_label": "booking without backend principle"
     },
     {
-      "label": "External services must not block the core path",
-      "file_type": "rationale",
-      "source_file": "PRODUCT.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "product_fallback_principle",
-      "community": 7,
-      "norm_label": "external services must not block the core path"
-    },
-    {
-      "label": "README.md",
+      "label": "README",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": null,
@@ -563,22 +457,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_md",
-      "community": 0,
-      "norm_label": "readme.md"
+      "id": "readme_doc",
+      "community": 3,
+      "norm_label": "readme"
     },
     {
-      "label": "Single-source STUDIO data principle",
-      "file_type": "rationale",
+      "label": "README Calendly section (outdated)",
+      "file_type": "document",
       "source_file": "README.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_single_source_data",
-      "community": 0,
-      "norm_label": "single-source studio data principle"
+      "id": "readme_calendlySection",
+      "community": 5,
+      "norm_label": "readme calendly section (outdated)"
     },
     {
       "label": "Calendly integration plan",
@@ -589,22 +483,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "calendly_plan",
-      "community": 0,
+      "id": "calplan_doc",
+      "community": 5,
       "norm_label": "calendly integration plan"
-    },
-    {
-      "label": "Deterministic Calendly script loading",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "calendly_plan_deterministic_loading",
-      "community": 0,
-      "norm_label": "deterministic calendly script loading"
     },
     {
       "label": "Site hardening plan",
@@ -615,64 +496,25 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_plan",
-      "community": 5,
+      "id": "hardplan_doc",
+      "community": 2,
       "norm_label": "site hardening plan"
     },
     {
-      "label": "Progressive enhancement of working HTML",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
+      "label": "Calendly integration design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_plan_progressive_enhancement",
+      "id": "calspec_doc",
       "community": 5,
-      "norm_label": "progressive enhancement of working html"
+      "norm_label": "calendly integration design"
     },
     {
-      "label": "Calendly integration design spec",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "calendly_spec",
-      "community": 0,
-      "norm_label": "calendly integration design spec"
-    },
-    {
-      "label": "Inline-embed booking choice",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "calendly_spec_inline_embed",
-      "community": 7,
-      "norm_label": "inline-embed booking choice"
-    },
-    {
-      "label": "Direct-link Calendly fallback",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "calendly_spec_fallback",
-      "community": 4,
-      "norm_label": "direct-link calendly fallback"
-    },
-    {
-      "label": "Site hardening design spec",
+      "label": "Site hardening design",
       "file_type": "document",
       "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
       "source_location": null,
@@ -680,35 +522,35 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_spec",
-      "community": 4,
-      "norm_label": "site hardening design spec"
+      "id": "hardspec_doc",
+      "community": 2,
+      "norm_label": "site hardening design"
     },
     {
-      "label": "Hosting-independent CSP hardening",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
+      "label": "WhatsApp prefilled booking request",
+      "file_type": "document",
+      "source_file": "PRODUCT.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_spec_csp",
-      "community": 4,
-      "norm_label": "hosting-independent csp hardening"
+      "id": "concept_whatsappBooking",
+      "community": 6,
+      "norm_label": "whatsapp prefilled booking request"
     },
     {
-      "label": "prefers-reduced-motion respect",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
+      "label": "Calendly embed (removed concept)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "hardening_spec_reduced_motion",
-      "community": 4,
-      "norm_label": "prefers-reduced-motion respect"
+      "id": "concept_calendly",
+      "community": 5,
+      "norm_label": "calendly embed (removed concept)"
     }
   ],
   "links": [
@@ -716,7 +558,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L116",
+      "source_location": "L92",
       "weight": 1.0,
       "source": "script_js",
       "target": "nagelstudio_template_script_bind",
@@ -726,37 +568,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L49",
+      "source_location": "L41",
       "weight": 1.0,
       "source": "script_js",
-      "target": "nagelstudio_template_script_bindpopup",
+      "target": "nagelstudio_template_script_buildbooking",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L35",
-      "weight": 1.0,
-      "source": "script_js",
-      "target": "nagelstudio_template_script_calendlyready",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "script.js",
-      "source_location": "L29",
-      "weight": 1.0,
-      "source": "script_js",
-      "target": "nagelstudio_template_script_calendlyurl",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "script.js",
-      "source_location": "L147",
+      "source_location": "L123",
       "weight": 1.0,
       "source": "script_js",
       "target": "nagelstudio_template_script_imagefallbacks",
@@ -766,17 +588,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L40",
-      "weight": 1.0,
-      "source": "script_js",
-      "target": "nagelstudio_template_script_loadcalendlyonce",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "script.js",
-      "source_location": "L155",
+      "source_location": "L131",
       "weight": 1.0,
       "source": "script_js",
       "target": "nagelstudio_template_script_nav",
@@ -786,20 +598,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L61",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "script_js",
-      "target": "nagelstudio_template_script_renderstaff",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "script.js",
-      "source_location": "L93",
-      "weight": 1.0,
-      "source": "script_js",
-      "target": "nagelstudio_template_script_setupbooking",
+      "target": "nagelstudio_template_script_pad",
       "confidence_score": 1.0
     },
     {
@@ -813,14 +615,13 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "calls",
-      "context": "call",
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L50",
+      "source_location": "L37",
       "weight": 1.0,
-      "source": "nagelstudio_template_script_bindpopup",
-      "target": "nagelstudio_template_script_calendlyurl",
+      "source": "script_js",
+      "target": "nagelstudio_template_script_todayiso",
       "confidence_score": 1.0
     },
     {
@@ -828,10 +629,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L107",
+      "source_location": "L65",
       "weight": 1.0,
-      "source": "nagelstudio_template_script_setupbooking",
-      "target": "nagelstudio_template_script_calendlyready",
+      "source": "nagelstudio_template_script_buildbooking",
+      "target": "nagelstudio_template_script_pad",
       "confidence_score": 1.0
     },
     {
@@ -839,10 +640,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L102",
+      "source_location": "L37",
       "weight": 1.0,
-      "source": "nagelstudio_template_script_setupbooking",
-      "target": "nagelstudio_template_script_loadcalendlyonce",
+      "source": "nagelstudio_template_script_todayiso",
+      "target": "nagelstudio_template_script_pad",
       "confidence_score": 1.0
     },
     {
@@ -850,10 +651,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L108",
+      "source_location": "L73",
       "weight": 1.0,
-      "source": "nagelstudio_template_script_setupbooking",
-      "target": "nagelstudio_template_script_bindpopup",
+      "source": "nagelstudio_template_script_buildbooking",
+      "target": "nagelstudio_template_script_todayiso",
       "confidence_score": 1.0
     },
     {
@@ -861,48 +662,37 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "script.js",
-      "source_location": "L98",
-      "weight": 1.0,
-      "source": "nagelstudio_template_script_setupbooking",
-      "target": "nagelstudio_template_script_renderstaff",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "script.js",
-      "source_location": "L144",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "nagelstudio_template_script_bind",
-      "target": "nagelstudio_template_script_setupbooking",
+      "target": "nagelstudio_template_script_buildbooking",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L94",
+      "source_location": "L87",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
-      "target": "tests_site_hardening_test_attributes",
+      "target": "tests_site_hardening_test_addeventlistener",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L95",
+      "source_location": "L86",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
-      "target": "tests_site_hardening_test_calendar",
+      "target": "tests_site_hardening_test_append",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L79",
+      "source_location": "L90",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
       "target": "tests_site_hardening_test_context",
@@ -912,10 +702,30 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L78",
+      "source_location": "L108",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
-      "target": "tests_site_hardening_test_note",
+      "target": "tests_site_hardening_test_decoded",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "tests_site_hardening_test_mjs",
+      "target": "tests_site_hardening_test_fields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "tests_site_hardening_test_mjs",
+      "target": "tests_site_hardening_test_handlers",
       "confidence_score": 1.0
     },
     {
@@ -932,6 +742,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "tests_site_hardening_test_mjs",
+      "target": "tests_site_hardening_test_preventdefault",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/site-hardening.test.mjs",
       "source_location": "L6",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
@@ -942,421 +762,81 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/site-hardening.test.mjs",
-      "source_location": "L77",
+      "source_location": "L76",
       "weight": 1.0,
       "source": "tests_site_hardening_test_mjs",
-      "target": "tests_site_hardening_test_status",
+      "target": "tests_site_hardening_test_values",
       "confidence_score": 1.0
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
+      "source_file": "tests/booking.test.mjs",
       "source_location": null,
       "weight": 1.0,
-      "source": "calendly_plan",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/calendly.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_test",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_md",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_single_source_data",
+      "source": "bookingtest_suite",
       "target": "script_STUDIO"
     },
     {
       "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_bind",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_renderStaff",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "script_STUDIO"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_bindPopup",
-      "target": "script_calendlyUrl"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_renderStaff",
-      "target": "script_calendlyReady"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "script_calendlyReady"
-    },
-    {
-      "relation": "references",
       "confidence": "INFERRED",
       "confidence_score": 0.65,
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_plan_deterministic_loading",
-      "target": "script_loadCalendlyOnce"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "script_loadCalendlyOnce"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_renderStaff",
-      "target": "script_bindPopup"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "script_bindPopup"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "script_renderStaff"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_bind",
-      "target": "script_setupBooking"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_setupBooking",
-      "target": "index_termin_section"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_bind",
-      "target": "index_data_field_bindings"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_domcontentloaded",
-      "target": "script_bind"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "script_imageFallbacks"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_domcontentloaded",
-      "target": "script_imageFallbacks"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "script_nav"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "script.js",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "script_domcontentloaded",
-      "target": "script_nav"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_html",
-      "target": "script_domcontentloaded"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/calendly.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_test",
-      "target": "index_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_plan",
-      "target": "index_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "index_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_html",
-      "target": "datenschutz_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_html",
-      "target": "impressum_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_html",
-      "target": "index_csp"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_plan",
-      "target": "index_termin_section"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_spec",
-      "target": "index_termin_section"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_spec_csp",
-      "target": "index_csp"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "index_csp"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_csp",
-      "target": "datenschutz_csp"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "index.html",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "index_csp",
-      "target": "impressum_csp"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "impressum_html"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "impressum.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "impressum_html",
-      "target": "impressum_csp"
+      "source": "impressum_doc",
+      "target": "script_STUDIO"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "datenschutz.html",
+      "source_file": "README.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "datenschutz_html",
-      "target": "datenschutz_csp"
+      "source": "readme_doc",
+      "target": "script_STUDIO"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_bind",
+      "target": "script_STUDIO"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_buildBooking",
+      "target": "script_STUDIO"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "datenschutz.html",
+      "source_file": "tests/booking.test.mjs",
       "source_location": null,
       "weight": 1.0,
-      "source": "datenschutz_html",
-      "target": "datenschutz_thirdparty_disclosure"
+      "source": "bookingtest_suite",
+      "target": "script_buildBooking"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_plan",
-      "target": "datenschutz_html"
+      "source": "concept_calendly",
+      "target": "script_buildBooking"
     },
     {
       "relation": "references",
@@ -1365,148 +845,158 @@
       "source_file": "tests/site-hardening.test.mjs",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_test",
-      "target": "datenschutz_html"
+      "source": "hardeningtest_suite",
+      "target": "script_buildBooking"
     },
     {
-      "relation": "references",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_bind",
+      "target": "script_buildBooking"
+    },
+    {
+      "relation": "implements",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
-      "source_file": "tests/site-hardening.test.mjs",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_test",
-      "target": "datenschutz_thirdparty_disclosure"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "tests/calendly.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_test",
-      "target": "calendly_plan"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "tests/calendly.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_test",
-      "target": "calendly_spec_fallback"
+      "source": "script_buildBooking",
+      "target": "concept_whatsappBooking"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_plan",
-      "target": "calendly_test"
+      "source": "script_buildBooking",
+      "target": "index_bookingForm"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_buildBooking",
+      "target": "script_pad"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_buildBooking",
+      "target": "script_todayISO"
     },
     {
       "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "tests/site-hardening.test.mjs",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/booking.test.mjs",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_test",
-      "target": "hardening_plan"
+      "source": "bookingtest_suite",
+      "target": "script_todayISO"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "script.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "script_todayISO",
+      "target": "script_pad"
     },
     {
       "relation": "references",
-      "confidence": "AMBIGUOUS",
-      "confidence_score": 0.3,
-      "source_file": "tests/site-hardening.test.mjs",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "hardening_test",
-      "target": "calendly_spec_fallback"
-    },
-    {
-      "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "PRODUCT.md",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "product_design_principles",
-      "target": "product_md"
+      "source": "script_bind",
+      "target": "index_dataBindings"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "PRODUCT.md",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "product_fallback_principle",
-      "target": "product_md"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "PRODUCT.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "product_design_principles",
-      "target": "calendly_spec_inline_embed"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "PRODUCT.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "product_fallback_principle",
-      "target": "calendly_spec_fallback"
+      "source": "script_bind",
+      "target": "index_mapFrame"
     },
     {
       "relation": "conceptually_related_to",
       "confidence": "INFERRED",
       "confidence_score": 0.65,
-      "source_file": "README.md",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "readme_md",
-      "target": "calendly_spec"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_single_source_data",
-      "target": "readme_md"
+      "source": "script_imageFallbacks",
+      "target": "index_dataBindings"
     },
     {
       "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_plan",
-      "target": "calendly_spec"
-    },
-    {
-      "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
+      "source_file": "script.js",
       "source_location": null,
       "weight": 1.0,
-      "source": "calendly_plan_deterministic_loading",
-      "target": "calendly_plan"
+      "source": "script_nav",
+      "target": "index_navToggle"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/booking.test.mjs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "bookingtest_suite",
+      "target": "index_bookingForm"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "concept_calendly",
+      "target": "index_bookingForm"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "index.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "index_bookingForm",
+      "target": "concept_whatsappBooking"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "hardeningtest_suite",
+      "target": "index_csp"
     },
     {
       "relation": "references",
@@ -1515,114 +1005,199 @@
       "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_plan",
-      "target": "hardening_spec"
+      "source": "hardplan_doc",
+      "target": "index_csp"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "hardeningtest_suite",
+      "target": "index_dataBindings"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "datenschutz.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "datenschutz_doc",
+      "target": "index_mapFrame"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "hardeningtest_suite",
+      "target": "index_navToggle"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/site-hardening.test.mjs",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "hardeningtest_suite",
+      "target": "datenschutz_doc"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
       "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_plan_progressive_enhancement",
-      "target": "hardening_plan"
+      "source": "hardplan_doc",
+      "target": "hardeningtest_suite"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
+      "source_file": "datenschutz.html",
       "source_location": null,
       "weight": 1.0,
-      "source": "calendly_spec_fallback",
-      "target": "calendly_spec"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "calendly_spec_inline_embed",
-      "target": "calendly_spec"
+      "source": "datenschutz_doc",
+      "target": "concept_whatsappBooking"
     },
     {
       "relation": "semantically_similar_to",
       "confidence": "INFERRED",
-      "confidence_score": 0.65,
+      "confidence_score": 0.7,
+      "source_file": "datenschutz.html",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "datenschutz_doc",
+      "target": "impressum_doc"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "hardspec_doc",
+      "target": "datenschutz_doc"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "PRODUCT.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_doc",
+      "target": "product_bookingNoBackend"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "PRODUCT.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "product_bookingNoBackend",
+      "target": "concept_whatsappBooking"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_calendlySection",
+      "target": "concept_calendly"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-06-20-calendly-integration.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "calplan_doc",
+      "target": "concept_calendly"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
       "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "calendly_spec_fallback",
-      "target": "hardening_spec_csp"
+      "source": "calspec_doc",
+      "target": "calplan_doc"
     },
     {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
       "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_spec_csp",
-      "target": "hardening_spec"
+      "source": "hardspec_doc",
+      "target": "hardplan_doc"
     },
     {
-      "relation": "rationale_for",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md",
+      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "hardening_spec_reduced_motion",
-      "target": "hardening_spec"
+      "source": "calspec_doc",
+      "target": "concept_calendly"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "concept_calendly",
+      "target": "concept_whatsappBooking"
     }
   ],
   "hyperedges": [
     {
       "id": "booking_flow",
-      "label": "Calendly booking flow",
+      "label": "Self-contained WhatsApp booking flow",
       "nodes": [
-        "script_setupBooking",
-        "script_renderStaff",
-        "script_bindPopup",
-        "script_loadCalendlyOnce",
-        "index_termin_section"
+        "index_bookingForm",
+        "script_buildBooking",
+        "script_STUDIO",
+        "concept_whatsappBooking"
       ],
       "relation": "participate_in",
-      "confidence": "EXTRACTED",
+      "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": "script.js"
     },
     {
-      "id": "csp_hardening",
-      "label": "Cross-page CSP hardening",
+      "id": "hardening_contracts",
+      "label": "Site hardening contract enforcement",
       "nodes": [
+        "hardeningtest_suite",
         "index_csp",
-        "impressum_csp",
-        "datenschutz_csp",
-        "hardening_spec_csp"
+        "hardspec_doc",
+        "hardplan_doc"
       ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/specs/2026-06-20-site-hardening-design.md"
-    },
-    {
-      "id": "fallback_resilience",
-      "label": "External-service fallback resilience",
-      "nodes": [
-        "product_fallback_principle",
-        "calendly_spec_fallback",
-        "calendly_plan_deterministic_loading",
-        "datenschutz_thirdparty_disclosure"
-      ],
-      "relation": "participate_in",
+      "relation": "implement",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
-      "source_file": "docs/superpowers/specs/2026-06-20-calendly-integration-design.md"
+      "source_file": "docs/superpowers/plans/2026-06-20-site-hardening.md"
     }
   ],
-  "built_at_commit": "435970b66093414c26c31ec0cd83c347036f8e86"
+  "built_at_commit": "3372f9b000825dcc858e48fc98769ecdaa83144a"
 }
