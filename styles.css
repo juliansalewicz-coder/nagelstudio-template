@@ -181,6 +181,9 @@ h3 { font-size: 1.5rem; }
 .bk-field select:focus,
 .bk-field input:focus { outline: none; border-color: var(--taupe); box-shadow: 0 0 0 3px rgba(156, 123, 91, .15); }
 .bk-submit { width: 100%; margin-top: .4rem; }
+.bk-privacy { margin-top: .6rem; font-size: .8rem; color: var(--muted); text-align: center; }
+.bk-privacy a { color: var(--taupe); text-decoration: underline; }
+.booking-disclaimer { max-width: 640px; margin: 2rem auto 0; text-align: center; font-size: .82rem; color: var(--muted); line-height: 1.6; }
 
 /* ===== Kontakt ===== */
 .contact { padding: var(--sec) 0; }
@@ -194,6 +197,8 @@ h3 { font-size: 1.5rem; }
 .ci-note { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
 .contact-map { border-radius: 18px; overflow: hidden; min-height: 420px; border: 1px solid var(--line); }
 .contact-map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; display: block; filter: grayscale(.12) contrast(.98); }
+.map-consent { min-height: 420px; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem; text-align: center; padding: 2rem; background: var(--cream); }
+.map-consent p { color: var(--muted); max-width: 34ch; font-size: .92rem; }
 
 /* ===== Footer ===== */
 .foot { background: var(--brown); color: var(--cream); padding: clamp(3rem, 6vw, 4.5rem) 0 2rem; }
@@ -216,6 +221,9 @@ h3 { font-size: 1.5rem; }
 .legal h2 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; margin: 2rem 0 .6rem; color: var(--taupe-dark); }
 .legal p { color: var(--ink); margin-bottom: .8rem; }
 .legal a { color: var(--taupe); }
+.legal ul { margin: .4rem 0 .8rem 1.2rem; color: var(--ink); }
+.legal ul li { margin-bottom: .4rem; }
+.legal-note { font-size: .85rem; color: var(--muted); font-style: italic; background: var(--cream-2); border-left: 3px solid var(--taupe); padding: .7rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.6rem; }
 .legal-back { margin-top: 2.5rem; }
 
 /* ===== Bild-Fallback ===== */

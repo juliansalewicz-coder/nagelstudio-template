@@ -282,6 +282,7 @@
           </label>
         </div>
         <button type="submit" class="btn bk-submit">Per WhatsApp anfragen</button>
+        <p class="bk-privacy">Mit dem Absenden werden deine Angaben als WhatsApp-Nachricht an uns übermittelt. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
       </form>
 
       <p class="booking-or" id="booking-or-line">oder direkt melden</p>
@@ -290,6 +291,8 @@
         <a class="btn btn-outline" href="tel:+41781234567" data-tel>Anrufen</a>
         <a class="btn btn-outline" href="mailto:hello@lunanails.ch" data-mail>E-Mail</a>
       </div>
+
+      <p class="booking-disclaimer">Unsere Leistungen sind rein kosmetischer Natur und ersetzen keine ärztliche Behandlung. Bei Entzündungen, offenen Wunden, Verdacht auf Nagelpilz oder bekannten Allergien bitte vorab ärztlich abklären.</p>
     </div>
   </section>
 
@@ -326,8 +329,12 @@
           <a href="#termin" class="btn">Termin anfragen</a>
         </div>
 
-        <div class="contact-map">
-          <iframe id="map-frame" src="https://maps.google.com/maps?q=Bahnhofstrasse%2012%2C%208001%20Z%C3%BCrich&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Standort Luna Nails & Beauty, Zürich"></iframe>
+        <!-- Karte lädt erst auf Klick (Google-Maps-Consent). Iframe wird in script.js eingefügt. -->
+        <div class="contact-map" id="map-frame">
+          <div class="map-consent" id="map-consent">
+            <p>Die Karte wird von Google&nbsp;Maps geladen. Dabei werden Daten an Google übertragen.</p>
+            <button type="button" class="btn btn-outline" id="map-load">Karte laden</button>
+          </div>
         </div>
       </div>
     </div>
