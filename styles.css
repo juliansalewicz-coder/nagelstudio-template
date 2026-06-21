@@ -74,7 +74,7 @@ h3 { font-size: 1.5rem; }
 .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--ink); cursor: pointer; }
 
 /* ===== Hero ===== */
-.hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; min-height: calc(100vh - var(--nav-h)); }
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; min-height: min(680px, calc(100vh - var(--nav-h))); }
 .hero-text { padding: 2.5rem 6% 3rem; max-width: 640px; margin-left: auto; }
 .hero-text h1 { margin-bottom: 1.3rem; }
 .hero-text p { color: var(--muted); font-size: 1.08rem; max-width: 46ch; }
@@ -84,7 +84,9 @@ h3 { font-size: 1.5rem; }
 .hero-img img { width: 100%; height: 100%; min-height: calc(100vh - var(--nav-h)); object-fit: cover; border-bottom-left-radius: 80px; }
 
 /* ===== Foto-Marquee ===== */
-.gallery { padding: var(--sec) 0 0; overflow: hidden; }
+.gallery { padding: var(--sec) 0; overflow: hidden; }
+.gallery .section-head { margin-bottom: 2.2rem; }
+.gallery-cta { text-align: center; margin-top: 2.2rem; }
 .marquee-row { overflow: hidden; }
 .marquee-track { display: flex; gap: 1rem; width: max-content; }
 .marquee-track img { width: 230px; height: 165px; object-fit: cover; border-radius: 14px; flex: 0 0 auto; }
@@ -189,13 +191,9 @@ h3 { font-size: 1.5rem; }
 .ci-row a:hover { color: var(--taupe); }
 .hours span { display: block; }
 .contact-info .btn { align-self: flex-start; margin-top: .4rem; }
-.find-us { background: var(--brown); color: var(--cream); border-radius: 20px; padding: clamp(2rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: center; }
-.find-us h3 { color: var(--cream); font-size: 1.7rem; margin-bottom: 1.3rem; }
-.find-us ul { list-style: none; display: grid; gap: .9rem; }
-.find-us li { position: relative; padding-left: 1.6rem; color: rgba(246,243,238,.85); }
-.find-us li::before { content: '→'; position: absolute; left: 0; color: var(--rose); }
-.contact-map { border-radius: 18px; overflow: hidden; height: 380px; }
-.contact-map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(.15) contrast(.97); }
+.ci-note { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+.contact-map { border-radius: 18px; overflow: hidden; min-height: 420px; border: 1px solid var(--line); }
+.contact-map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; display: block; filter: grayscale(.12) contrast(.98); }
 
 /* ===== Footer ===== */
 .foot { background: var(--brown); color: var(--cream); padding: clamp(3rem, 6vw, 4.5rem) 0 2rem; }
