@@ -74,8 +74,8 @@ h3 { font-size: 1.5rem; }
 .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--ink); cursor: pointer; }
 
 /* ===== Hero ===== */
-.hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; min-height: min(720px, calc(100vh - var(--nav-h))); }
-.hero-text { padding: 2.5rem 6% 3rem; max-width: 640px; margin-left: auto; }
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; align-items: start; min-height: min(720px, calc(100vh - var(--nav-h))); }
+.hero-text { padding: clamp(2rem, 5vh, 3.5rem) 6% 3rem; max-width: 640px; margin-left: auto; }
 .hero-text h1 { margin-bottom: 1.3rem; }
 .hero-text p { color: var(--muted); font-size: 1.08rem; max-width: 46ch; }
 .hero-cta { display: flex; gap: .9rem; flex-wrap: wrap; margin: 2rem 0 1.4rem; }
