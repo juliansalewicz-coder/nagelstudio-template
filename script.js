@@ -114,10 +114,23 @@ function bind() {
     });
     box.replaceChildren(...rows);
   });
-  const map = document.querySelector('#map-frame');
-  if (map) map.src = `https://maps.google.com/maps?q=${encodeURIComponent(STUDIO.street + ', ' + STUDIO.zip)}&z=15&output=embed`;
-
+  setupMapConsent();
   buildBooking();
+}
+
+// Google Maps erst nach aktivem Klick laden (kein Daten­abfluss ohne Einwilligung).
+function setupMapConsent() {
+  const wrap = document.getElementById('map-frame');
+  const btn = document.getElementById('map-load');
+  if (!wrap || !btn) return;
+  btn.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(STUDIO.street + ', ' + STUDIO.zip)}&z=15&output=embed`;
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.title = `Standort ${STUDIO.name}`;
+    wrap.replaceChildren(iframe);
+  });
 }
 
 function imageFallbacks() {
