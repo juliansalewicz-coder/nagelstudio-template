@@ -14,79 +14,32 @@ const STUDIO = {
   instagram: 'https://instagram.com/lunanails',
   facebook: 'https://facebook.com/lunanails',
   hours: ['Mo–Fr: 09:00–19:00', 'Sa: 09:00–16:00', 'So: geschlossen'],
-  // Behandlungen für die Termin-Anfrage. Hinzufügen = eine Zeile ergänzen.
-  services: [
-    'Maniküre',
-    'Gel-Nägel',
-    'Acrylnägel',
-    'Auffüllen',
-    'Wimpern (Lifting / Extensions)',
-    'Augenbrauen / Microblading',
-    'Pflege & Waxing',
-    'Beratung',
-  ],
-  // Kosmetikerinnen. Mitarbeiterin hinzufügen = einfach eine Zeile ergänzen.
-  staff: [
-    { name: 'Sara',  role: 'Nägel & Gel' },
-    { name: 'Elena', role: 'Wimpern & Brows' },
-    { name: 'Nora',  role: 'Pflege & Waxing' },
-  ],
+  // Öffentlicher Setmore-Buchungslink. Dienstleistungen, Mitarbeiter, Zeiten
+  // und Bestätigungen verwaltet das Studio direkt im Setmore-Konto.
+  setmore: 'https://julian1bu6.setmore.com',
 };
 
-const pad = n => String(n).padStart(2, '0');
-const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+// Setmore-Buchungsseite als responsives iframe einbetten. Setmore übernimmt
+// Dienstleistung, Mitarbeiter, Verfügbarkeit, Termin, Kontakt und Bestätigung.
+function setupSetmore() {
+  const link = STUDIO.setmore;
+  const ready = typeof link === 'string' && /^https:\/\/[^ "']+\.setmore\.com/.test(link);
 
-// Selbst-enthaltene Termin-Anfrage: Behandlung + Kosmetikerin + Wunschtermin
-// + Kontakt → fertige WhatsApp-Nachricht ans Studio. Kein Backend, kein Konto.
-function buildBooking() {
-  const form = document.getElementById('booking-form');
-  if (!form) return;
+  const fallback = document.getElementById('setmore-fallback');
+  if (fallback && ready) fallback.href = link;
 
-  // Behandlungen befüllen
-  const service = document.getElementById('bk-service');
-  if (service) STUDIO.services.forEach(s => {
-    const o = document.createElement('option');
-    o.value = s; o.textContent = s;
-    service.append(o);
-  });
-
-  // Kosmetikerinnen befüllen ("Egal" bleibt als erste Option im HTML)
-  const staff = document.getElementById('bk-staff');
-  if (staff) STUDIO.staff.forEach(p => {
-    const o = document.createElement('option');
-    o.value = p.name;
-    o.textContent = p.role ? `${p.name} — ${p.role}` : p.name;
-    staff.append(o);
-  });
-
-  // Zeit-Slots 09:00–18:30 in 30-Min-Schritten
-  const time = document.getElementById('bk-time');
-  if (time) for (let h = 9; h <= 18; h++) for (const m of ['00', '30']) {
-    const t = `${pad(h)}:${m}`;
-    const o = document.createElement('option');
-    o.value = t; o.textContent = t;
-    time.append(o);
+  const frame = document.getElementById('setmore-frame');
+  if (frame && ready) {
+    const iframe = document.createElement('iframe');
+    iframe.src = link;
+    iframe.title = `Online-Terminbuchung — ${STUDIO.name}`;
+    iframe.loading = 'lazy';
+    iframe.setAttribute('allow', 'payment');
+    frame.replaceChildren(iframe);
   }
 
-  // Datum frühestens heute (lokal gerechnet → kein Zeitzonen-Versatz)
-  const date = document.getElementById('bk-date');
-  if (date) date.min = todayISO();
-
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const val = id => (document.getElementById(id)?.value || '').trim();
-    const iso = val('bk-date');
-    const datePretty = iso ? iso.split('-').reverse().join('.') : '';
-    const message = [
-      `Hallo ${STUDIO.name}, ich möchte gerne einen Termin anfragen:`,
-      `• Behandlung: ${val('bk-service')}`,
-      `• Kosmetikerin: ${val('bk-staff') || 'egal, wer frei ist'}`,
-      `• Wunschtermin: ${`${datePretty} ${val('bk-time')}`.trim()}`,
-      `• Name: ${val('bk-name')}`,
-      `• Telefon: ${val('bk-phone')}`,
-    ].join('\n');
-    window.open(`https://wa.me/${STUDIO.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
-  });
+  // Ohne gültigen Link: Buchungs-Embed ausblenden, Kontaktwege bleiben sichtbar.
+  if (!ready) document.getElementById('setmore-embed')?.setAttribute('hidden', '');
 }
 
 function bind() {
@@ -115,7 +68,7 @@ function bind() {
     box.replaceChildren(...rows);
   });
   setupMapConsent();
-  buildBooking();
+  setupSetmore();
 }
 
 // Google Maps erst nach aktivem Klick laden (kein Daten­abfluss ohne Einwilligung).

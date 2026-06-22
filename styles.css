@@ -161,6 +161,12 @@ h3 { font-size: 1.5rem; }
 .booking-or { text-align: center; color: var(--muted); font-size: .88rem; letter-spacing: .04em; margin: 2rem 0 1.1rem; }
 .booking-actions { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
 
+/* Setmore-Buchung (iframe) */
+.setmore-frame { width: 100%; min-height: 760px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--cream); }
+.setmore-frame iframe { width: 100%; min-height: 760px; border: 0; display: block; }
+.setmore-fallback-note { text-align: center; font-size: .9rem; color: var(--muted); margin-top: 1rem; }
+.setmore-fallback-note a { color: var(--taupe); text-decoration: underline; }
+
 /* Personen-Auswahl */
 .staff-select { margin-top: 1.6rem; }
 .staff-lead { text-align: center; color: var(--muted); font-size: .88rem; letter-spacing: .04em; margin-bottom: 1.2rem; }
