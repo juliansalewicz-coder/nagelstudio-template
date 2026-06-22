@@ -14,32 +14,47 @@ const STUDIO = {
   instagram: 'https://instagram.com/lunanails',
   facebook: 'https://facebook.com/lunanails',
   hours: ['Mo–Fr: 09:00–19:00', 'Sa: 09:00–16:00', 'So: geschlossen'],
-  // Öffentlicher Setmore-Buchungslink. Dienstleistungen, Mitarbeiter, Zeiten
-  // und Bestätigungen verwaltet das Studio direkt im Setmore-Konto.
-  setmore: 'https://julian1bu6.setmore.com',
+  // Dein Calendly-Link. In Calendly die Zeitzone (Europe/Zurich) und die
+  // Verfügbarkeit setzen — dann erscheinen hier die freien Termine.
+  calendly: 'https://calendly.com/julian-salewicz/30min',
 };
 
-// Setmore-Buchungsseite als responsives iframe einbetten. Setmore übernimmt
-// Dienstleistung, Mitarbeiter, Verfügbarkeit, Termin, Kontakt und Bestätigung.
-function setupSetmore() {
-  const link = STUDIO.setmore;
-  const ready = typeof link === 'string' && /^https:\/\/[^ "']+\.setmore\.com/.test(link);
+const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js';
 
-  const fallback = document.getElementById('setmore-fallback');
-  if (fallback && ready) fallback.href = link;
+// Calendly-Link mit Studio-Theme (Taupe-Farben, Detail-Panel aus).
+function calendlyUrl(link) {
+  const theme = 'hide_event_type_details=1&primary_color=9c7b5b&background_color=f6f3ee&text_color=322b25';
+  const sep = link.includes('?') ? '&' : '?';
+  return link + sep + theme;
+}
 
-  const frame = document.getElementById('setmore-frame');
-  if (frame && ready) {
-    const iframe = document.createElement('iframe');
-    iframe.src = link;
-    iframe.title = `Online-Terminbuchung — ${STUDIO.name}`;
-    iframe.loading = 'lazy';
-    iframe.setAttribute('allow', 'payment');
-    frame.replaceChildren(iframe);
-  }
+function calendlyReady(link) {
+  return typeof link === 'string' && /^https:\/\/calendly\.com\//.test(link);
+}
 
-  // Ohne gültigen Link: Buchungs-Embed ausblenden, Kontaktwege bleiben sichtbar.
-  if (!ready) document.getElementById('setmore-embed')?.setAttribute('hidden', '');
+// Termin-Button öffnet Calendly als Popup-Overlay. Ohne JS bleibt der Button
+// ein normaler Link auf die Calendly-Seite (Progressive Enhancement).
+function setupCalendlyPopup() {
+  const btn = document.getElementById('cal-popup');
+  if (!btn) return;
+  if (!calendlyReady(STUDIO.calendly)) { btn.hidden = true; return; }
+
+  const url = calendlyUrl(STUDIO.calendly);
+  btn.href = url;
+  const fallback = document.getElementById('cal-fallback');
+  if (fallback) fallback.href = STUDIO.calendly;
+
+  const calScript = document.createElement('script');
+  calScript.src = CALENDLY_SCRIPT_SRC;
+  calScript.async = true;
+  document.head.append(calScript);
+
+  btn.addEventListener('click', event => {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      event.preventDefault();
+      window.Calendly.initPopupWidget({ url });
+    }
+  });
 }
 
 function bind() {
@@ -68,7 +83,7 @@ function bind() {
     box.replaceChildren(...rows);
   });
   setupMapConsent();
-  setupSetmore();
+  setupCalendlyPopup();
 }
 
 // Google Maps erst nach aktivem Klick laden (kein Daten­abfluss ohne Einwilligung).

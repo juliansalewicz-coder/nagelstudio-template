@@ -72,30 +72,30 @@ test('mobile navigation exposes its expanded state', () => {
   assert.match(script, /setAttribute\('aria-expanded'/);
 });
 
-test('setupSetmore embeds the booking page and wires the fallback link', () => {
-  const frameChildren = [];
+test('the booking button is wired as a no-JS link plus a Calendly popup', () => {
+  const listeners = {};
+  const btn = { href: '', hidden: false, addEventListener(type, fn) { listeners[type] = fn; } };
   const fallback = { href: '' };
-  const frame = { replaceChildren(...nodes) { frameChildren.push(...nodes); } };
-  const iframe = { setAttribute() {} };
-  const elements = { 'setmore-frame': frame, 'setmore-fallback': fallback };
+  const elements = { 'cal-popup': btn, 'cal-fallback': fallback };
 
   const context = vm.createContext({
     document: {
       addEventListener() {},
       getElementById(id) { return elements[id] ?? null; },
-      createElement() { return iframe; },
+      createElement() { return {}; },
+      head: { append() {} },
     },
     window: {},
     setTimeout,
     clearTimeout,
   });
   vm.runInContext(script, context);
-  context.setupSetmore();
+  context.setupCalendlyPopup();
 
-  // Ersatzlink zeigt auf die Setmore-Buchungsseite.
-  assert.match(fallback.href, /\.setmore\.com/);
-  // Genau ein iframe mit Setmore-URL und zugänglichem Titel wurde eingebettet.
-  assert.equal(frameChildren.length, 1);
-  assert.match(iframe.src, /\.setmore\.com/);
-  assert.match(iframe.title, /Online-Terminbuchung/);
+  // Ohne JS ist der Button ein echter, zum Studio-Theme gehörender Calendly-Link.
+  assert.match(btn.href, /calendly\.com\/julian-salewicz\/30min/);
+  assert.match(btn.href, /primary_color=9c7b5b/);
+  // Der Ersatzlink zeigt auf die Calendly-Seite, und ein Klick-Handler rüstet zum Popup auf.
+  assert.match(fallback.href, /calendly\.com\/julian-salewicz\/30min/);
+  assert.equal(typeof listeners.click, 'function');
 });
