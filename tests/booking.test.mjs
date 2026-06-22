@@ -5,33 +5,31 @@ import { readFile } from 'node:fs/promises';
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const script = await readFile(new URL('../script.js', import.meta.url), 'utf8');
 
-test('booking is a self-contained request form, not a third-party embed', () => {
-  assert.match(html, /id="booking-form"/);
-  assert.doesNotMatch(html, /calendly/i);
-  assert.doesNotMatch(script, /calendly/i);
+test('booking uses the configured Setmore link, not a hand-rolled system', () => {
+  assert.match(script, /setmore:\s*'https:\/\/[^']+\.setmore\.com'/);
 });
 
-test('the form collects service, staff, date, time and contact', () => {
-  for (const id of ['bk-service', 'bk-staff', 'bk-date', 'bk-time', 'bk-name', 'bk-phone']) {
-    assert.match(html, new RegExp(`id="${id}"`), `missing field ${id}`);
-  }
+test('the booking section embeds Setmore via a config-driven iframe', () => {
+  assert.match(html, /id="setmore-frame"/);
+  assert.match(script, /const link = STUDIO\.setmore/);
+  assert.match(script, /document\.createElement\('iframe'\)/);
+  assert.match(script, /iframe\.src = link/);
 });
 
-test('key fields are required so a request is actionable', () => {
-  assert.match(html, /id="bk-service"[^>]*\brequired\b/);
-  assert.match(html, /id="bk-date"[^>]*\brequired\b/);
-  assert.match(html, /id="bk-name"[^>]*\brequired\b/);
-  assert.match(html, /id="bk-phone"[^>]*\brequired\b/);
+test('the embedded iframe gets an accessible title', () => {
+  assert.match(script, /iframe\.title = `Online-Terminbuchung/);
 });
 
-test('services and staff come from the central STUDIO config', () => {
-  assert.match(script, /services:\s*\[/);
-  assert.match(script, /staff:\s*\[/);
-  assert.match(script, /STUDIO\.services\.forEach/);
-  assert.match(script, /STUDIO\.staff\.forEach/);
+test('a fallback link opens Setmore in a new tab', () => {
+  assert.match(html, /id="setmore-fallback"[^>]*target="_blank"[^>]*rel="noopener"/);
+  assert.match(html, /Terminbuchung öffnen/);
 });
 
-test('the earliest date is computed locally to avoid timezone drift', () => {
-  assert.match(script, /date\.min = todayISO\(\)/);
-  assert.doesNotMatch(script, /toISOString\(\)\.slice/);
+test('the Setmore page is injected by JS, not hard-coded as an inline iframe', () => {
+  assert.doesNotMatch(html, /<iframe[^>]*setmore\.com/);
+});
+
+test('no self-built booking form or calendar remains', () => {
+  assert.doesNotMatch(html, /id="booking-form"/);
+  assert.doesNotMatch(script, /buildBooking/);
 });

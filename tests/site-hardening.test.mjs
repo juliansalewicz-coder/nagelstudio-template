@@ -72,42 +72,30 @@ test('mobile navigation exposes its expanded state', () => {
   assert.match(script, /setAttribute\('aria-expanded'/);
 });
 
-test('the booking form builds a prefilled WhatsApp request from its fields', () => {
-  const values = {
-    'bk-service': 'Gel-Nägel',
-    'bk-staff': 'Sara',
-    'bk-date': '2026-06-27',
-    'bk-time': '14:00',
-    'bk-name': 'Test Kundin',
-    'bk-phone': '079 000 00 00',
-  };
-  const handlers = {};
-  const fields = {};
-  for (const [id, value] of Object.entries(values)) fields[id] = { value, min: '', append() {} };
-  fields['booking-form'] = { addEventListener(type, fn) { handlers[type] = fn; } };
+test('setupSetmore embeds the booking page and wires the fallback link', () => {
+  const frameChildren = [];
+  const fallback = { href: '' };
+  const frame = { replaceChildren(...nodes) { frameChildren.push(...nodes); } };
+  const iframe = { setAttribute() {} };
+  const elements = { 'setmore-frame': frame, 'setmore-fallback': fallback };
 
-  let openedUrl = null;
   const context = vm.createContext({
     document: {
       addEventListener() {},
-      getElementById(id) { return fields[id] ?? null; },
-      createElement() { return {}; },
+      getElementById(id) { return elements[id] ?? null; },
+      createElement() { return iframe; },
     },
-    window: { open(url) { openedUrl = url; } },
-    Date,
+    window: {},
     setTimeout,
     clearTimeout,
   });
   vm.runInContext(script, context);
-  context.buildBooking();
+  context.setupSetmore();
 
-  assert.equal(typeof handlers.submit, 'function');
-  handlers.submit({ preventDefault() {} });
-
-  assert.match(openedUrl, /wa\.me\/41781234567/);
-  const decoded = decodeURIComponent(openedUrl);
-  assert.match(decoded, /Behandlung: Gel-Nägel/);
-  assert.match(decoded, /Kosmetikerin: Sara/);
-  assert.match(decoded, /27\.06\.2026 14:00/);
-  assert.match(decoded, /Telefon: 079 000 00 00/);
+  // Ersatzlink zeigt auf die Setmore-Buchungsseite.
+  assert.match(fallback.href, /\.setmore\.com/);
+  // Genau ein iframe mit Setmore-URL und zugänglichem Titel wurde eingebettet.
+  assert.equal(frameChildren.length, 1);
+  assert.match(iframe.src, /\.setmore\.com/);
+  assert.match(iframe.title, /Online-Terminbuchung/);
 });
