@@ -168,12 +168,12 @@ h3 { font-size: 1.45rem; }
 .booking-points li::before { content: '✓'; position: absolute; left: 0; color: var(--taupe); font-weight: 600; }
 .booking-or-inline { color: var(--muted); font-size: .9rem; margin-bottom: .8rem; }
 .booking-intro .booking-actions { justify-content: flex-start; }
-.booking-cal { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: .55rem; box-shadow: 0 28px 60px -38px rgba(41,33,27,.45); }
+.booking-cal { background: #fff; border: 1px solid var(--line); border-radius: 26px; padding: .85rem; box-shadow: 0 30px 70px -36px rgba(41,33,27,.4); }
 .center-head { text-align: center; margin-bottom: 2rem; }
 .center-head p { color: var(--muted); margin: 1rem auto 0; max-width: 58ch; }
 .calendly-status { margin: 0 0 .8rem; text-align: center; color: var(--taupe-dark); }
 .calendly-status.is-error { color: var(--ink); font-weight: 500; }
-.calendly-inline-widget { min-width: 0; height: 660px; border-radius: 18px; overflow: hidden; background: var(--cream); }
+.calendly-inline-widget { min-width: 0; height: 630px; border-radius: 18px; overflow: hidden; background: #fff; }
 .calendly-fallback { max-width: 620px; margin: 0 auto 1.25rem; padding: 1.4rem; text-align: center; border: 1px solid var(--line); border-radius: 14px; background: var(--cream); }
 .calendly-fallback p { color: var(--ink); }
 .booking-primary-actions { display: flex; justify-content: center; margin-top: 1.2rem; }

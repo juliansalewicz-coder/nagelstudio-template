@@ -23,7 +23,7 @@ const CALENDLY_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.
 
 // Calendly-Link mit Studio-Theme (Taupe-Farben, Detail-Panel aus).
 function calendlyUrl(link) {
-  const theme = 'hide_event_type_details=1&primary_color=9c7b5b&background_color=f6f3ee&text_color=322b25';
+  const theme = 'hide_event_type_details=1&hide_gdpr_banner=1&primary_color=9c7b5b&background_color=ffffff&text_color=322b25';
   const sep = link.includes('?') ? '&' : '?';
   return link + sep + theme;
 }
