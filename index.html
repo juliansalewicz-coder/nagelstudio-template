@@ -255,22 +255,30 @@
 
   <!-- ===== TERMIN (Calendly Inline-Kalender) ===== -->
   <section class="booking" id="termin">
-    <div class="wrap booking-inner">
-      <div class="section-head center-head">
-        <span class="eyebrow">Termin</span>
-        <h2>Termin einfach online buchen</h2>
-        <p>Wähle direkt im Kalender einen freien Termin — du erhältst sofort eine Bestätigung.</p>
-      </div>
+    <div class="wrap">
+      <div class="booking-layout">
+        <div class="booking-intro">
+          <span class="eyebrow">Termin</span>
+          <h2>Termin einfach online buchen</h2>
+          <p>Wähle direkt im Kalender einen freien Termin — du erhältst sofort eine Bestätigung, ganz ohne Hin und Her.</p>
+          <ul class="booking-points">
+            <li>Sofortige Bestätigung</li>
+            <li>Zentral in Zürich, gut mit ÖV erreichbar</li>
+            <li>Faire, transparente Preise</li>
+          </ul>
+          <p class="booking-or-inline">Lieber persönlich?</p>
+          <div class="booking-actions">
+            <a class="btn" href="https://wa.me/41781234567?text=Hallo%20Luna%20Nails%20%26%20Beauty%2C%20ich%20m%C3%B6chte%20gerne%20einen%20Termin%20anfragen.%20Wann%20w%C3%A4re%20etwas%20frei%3F" data-wa target="_blank" rel="noopener">Per WhatsApp</a>
+            <a class="btn btn-outline" href="tel:+41781234567" data-tel>Anrufen</a>
+            <a class="btn btn-outline" href="mailto:hello@lunanails.ch" data-mail>E-Mail</a>
+          </div>
+        </div>
 
-      <!-- Calendly Inline-Kalender. data-url wird in script.js aus STUDIO.calendly gesetzt. -->
-      <div class="calendly-inline-widget" id="calendly" data-url="" aria-label="Online-Terminkalender"></div>
-      <p class="booking-fallback-note">Falls der Kalender nicht lädt, <a id="cal-fallback" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Terminbuchung öffnen</a>.</p>
-
-      <p class="booking-or" id="booking-or-line">oder direkt melden</p>
-      <div class="booking-actions">
-        <a class="btn" href="https://wa.me/41781234567?text=Hallo%20Luna%20Nails%20%26%20Beauty%2C%20ich%20m%C3%B6chte%20gerne%20einen%20Termin%20anfragen.%20Wann%20w%C3%A4re%20etwas%20frei%3F" data-wa target="_blank" rel="noopener">Per WhatsApp</a>
-        <a class="btn btn-outline" href="tel:+41781234567" data-tel>Anrufen</a>
-        <a class="btn btn-outline" href="mailto:hello@lunanails.ch" data-mail>E-Mail</a>
+        <div class="booking-cal">
+          <!-- Calendly Inline-Kalender. data-url wird in script.js aus STUDIO.calendly gesetzt. -->
+          <div class="calendly-inline-widget" id="calendly" data-url="" aria-label="Online-Terminkalender"></div>
+          <p class="booking-fallback-note">Falls der Kalender nicht lädt, <a id="cal-fallback" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Terminbuchung öffnen</a>.</p>
+        </div>
       </div>
 
       <p class="booking-disclaimer">Unsere Leistungen sind rein kosmetischer Natur und ersetzen keine ärztliche Behandlung. Bei Entzündungen, offenen Wunden, Verdacht auf Nagelpilz oder bekannten Allergien bitte vorab ärztlich abklären.</p>
