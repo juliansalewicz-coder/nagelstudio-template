@@ -62,6 +62,8 @@ function bind() {
   document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + STUDIO.email; });
   document.querySelectorAll('[data-ig]').forEach(a => { a.href = STUDIO.instagram; });
   document.querySelectorAll('[data-fb]').forEach(a => { a.href = STUDIO.facebook; });
+  const route = document.getElementById('route-link');
+  if (route) route.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO.street + ', ' + STUDIO.zip)}`;
   document.querySelectorAll('[data-wa]').forEach(a => {
     a.href = `https://wa.me/${STUDIO.whatsapp}?text=` + encodeURIComponent(
       `Hallo ${STUDIO.name}, ich möchte gerne einen Termin anfragen. Wann wäre etwas frei?`);
