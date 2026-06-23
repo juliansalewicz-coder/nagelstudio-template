@@ -253,20 +253,18 @@
     </div>
   </section>
 
-  <!-- ===== TERMIN (Calendly-Popup) ===== -->
+  <!-- ===== TERMIN (Calendly Inline-Kalender) ===== -->
   <section class="booking" id="termin">
     <div class="wrap booking-inner">
       <div class="section-head center-head">
         <span class="eyebrow">Termin</span>
         <h2>Termin einfach online buchen</h2>
-        <p>Wähle online einen freien Termin — du erhältst direkt eine Bestätigung.</p>
+        <p>Wähle direkt im Kalender einen freien Termin — du erhältst sofort eine Bestätigung.</p>
       </div>
 
-      <!-- Calendly öffnet als Popup-Overlay (Button). href dient als Fallback ohne JS. -->
-      <div class="booking-primary-actions">
-        <a class="btn" id="cal-popup" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Termin online buchen</a>
-      </div>
-      <p class="booking-fallback-note">Falls sich der Kalender nicht öffnet, <a id="cal-fallback" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Terminbuchung öffnen</a>.</p>
+      <!-- Calendly Inline-Kalender. data-url wird in script.js aus STUDIO.calendly gesetzt. -->
+      <div class="calendly-inline-widget" id="calendly" data-url="" aria-label="Online-Terminkalender"></div>
+      <p class="booking-fallback-note">Falls der Kalender nicht lädt, <a id="cal-fallback" href="https://calendly.com/julian-salewicz/30min" target="_blank" rel="noopener">Terminbuchung öffnen</a>.</p>
 
       <p class="booking-or" id="booking-or-line">oder direkt melden</p>
       <div class="booking-actions">

@@ -72,11 +72,10 @@ test('mobile navigation exposes its expanded state', () => {
   assert.match(script, /setAttribute\('aria-expanded'/);
 });
 
-test('the booking button is wired as a no-JS link plus a Calendly popup', () => {
-  const listeners = {};
-  const btn = { href: '', hidden: false, addEventListener(type, fn) { listeners[type] = fn; } };
+test('Calendly is embedded inline via a config-driven data-url plus fallback link', () => {
+  const wrap = { attrs: {}, setAttribute(k, v) { this.attrs[k] = v; } };
   const fallback = { href: '' };
-  const elements = { 'cal-popup': btn, 'cal-fallback': fallback };
+  const elements = { 'calendly': wrap, 'cal-fallback': fallback };
 
   const context = vm.createContext({
     document: {
@@ -90,12 +89,11 @@ test('the booking button is wired as a no-JS link plus a Calendly popup', () => 
     clearTimeout,
   });
   vm.runInContext(script, context);
-  context.setupCalendlyPopup();
+  context.setupCalendlyInline();
 
-  // Ohne JS ist der Button ein echter, zum Studio-Theme gehörender Calendly-Link.
-  assert.match(btn.href, /calendly\.com\/julian-salewicz\/30min/);
-  assert.match(btn.href, /primary_color=9c7b5b/);
-  // Der Ersatzlink zeigt auf die Calendly-Seite, und ein Klick-Handler rüstet zum Popup auf.
+  // Der Inline-Kalender bekommt die zum Studio-Theme gehörende Calendly-URL.
+  assert.match(wrap.attrs['data-url'] || '', /calendly\.com\/julian-salewicz\/30min/);
+  assert.match(wrap.attrs['data-url'] || '', /primary_color=9c7b5b/);
+  // Der Ersatzlink zeigt auf die Calendly-Seite.
   assert.match(fallback.href, /calendly\.com\/julian-salewicz\/30min/);
-  assert.equal(typeof listeners.click, 'function');
 });

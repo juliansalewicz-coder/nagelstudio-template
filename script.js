@@ -32,29 +32,21 @@ function calendlyReady(link) {
   return typeof link === 'string' && /^https:\/\/calendly\.com\//.test(link);
 }
 
-// Termin-Button öffnet Calendly als Popup-Overlay. Ohne JS bleibt der Button
-// ein normaler Link auf die Calendly-Seite (Progressive Enhancement).
-function setupCalendlyPopup() {
-  const btn = document.getElementById('cal-popup');
-  if (!btn) return;
-  if (!calendlyReady(STUDIO.calendly)) { btn.hidden = true; return; }
-
-  const url = calendlyUrl(STUDIO.calendly);
-  btn.href = url;
+// Calendly als Inline-Kalender direkt auf der Seite. widget.js rendert jeden
+// .calendly-inline-widget mit data-url automatisch. Ersatzlink bleibt als Fallback.
+function setupCalendlyInline() {
   const fallback = document.getElementById('cal-fallback');
   if (fallback) fallback.href = STUDIO.calendly;
+
+  const wrap = document.getElementById('calendly');
+  if (!wrap || !calendlyReady(STUDIO.calendly)) return;
+
+  wrap.setAttribute('data-url', calendlyUrl(STUDIO.calendly));
 
   const calScript = document.createElement('script');
   calScript.src = CALENDLY_SCRIPT_SRC;
   calScript.async = true;
   document.head.append(calScript);
-
-  btn.addEventListener('click', event => {
-    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      event.preventDefault();
-      window.Calendly.initPopupWidget({ url });
-    }
-  });
 }
 
 function bind() {
@@ -83,7 +75,7 @@ function bind() {
     box.replaceChildren(...rows);
   });
   setupMapConsent();
-  setupCalendlyPopup();
+  setupCalendlyInline();
 }
 
 // Google Maps erst nach aktivem Klick laden (kein Daten­abfluss ohne Einwilligung).
