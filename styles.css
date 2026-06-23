@@ -158,12 +158,20 @@ h3 { font-size: 1.45rem; }
 
 /* ===== Termin (Calendly) ===== */
 .booking { padding: var(--sec) 0; background: var(--cream-2); }
-.booking-inner { max-width: 900px; margin: 0 auto; }
+.booking-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+.booking-intro h2 { margin: .2rem 0 1rem; }
+.booking-intro > p { color: var(--muted); max-width: 40ch; }
+.booking-points { list-style: none; margin: 1.4rem 0 1.9rem; display: grid; gap: .65rem; }
+.booking-points li { position: relative; padding-left: 1.7rem; color: var(--ink); font-size: .98rem; }
+.booking-points li::before { content: '✓'; position: absolute; left: 0; color: var(--taupe); font-weight: 600; }
+.booking-or-inline { color: var(--muted); font-size: .9rem; margin-bottom: .8rem; }
+.booking-intro .booking-actions { justify-content: flex-start; }
+.booking-cal { background: #fff; border: 1px solid var(--line); border-radius: 24px; padding: .55rem; box-shadow: 0 28px 60px -38px rgba(41,33,27,.45); }
 .center-head { text-align: center; margin-bottom: 2rem; }
 .center-head p { color: var(--muted); margin: 1rem auto 0; max-width: 58ch; }
 .calendly-status { margin: 0 0 .8rem; text-align: center; color: var(--taupe-dark); }
 .calendly-status.is-error { color: var(--ink); font-weight: 500; }
-.calendly-inline-widget { min-width: 0; height: 680px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--cream); }
+.calendly-inline-widget { min-width: 0; height: 660px; border-radius: 18px; overflow: hidden; background: var(--cream); }
 .calendly-fallback { max-width: 620px; margin: 0 auto 1.25rem; padding: 1.4rem; text-align: center; border: 1px solid var(--line); border-radius: 14px; background: var(--cream); }
 .calendly-fallback p { color: var(--ink); }
 .booking-primary-actions { display: flex; justify-content: center; margin-top: 1.2rem; }
@@ -251,7 +259,7 @@ h3 { font-size: 1.45rem; }
   .hero-text { max-width: none; }
   .hero-text h1 { font-size: clamp(2.4rem, 10vw, 2.9rem); }
   .hero-media img { height: 56vh; max-height: 440px; object-position: center 50%; }
-  .about-grid, .why-grid, .price-grid, .service-grid, .contact-grid { grid-template-columns: 1fr; }
+  .about-grid, .why-grid, .price-grid, .service-grid, .contact-grid, .booking-layout { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .about-img-1 { margin-top: 0; height: 220px; }
   .about-img-2 { height: 300px; }
