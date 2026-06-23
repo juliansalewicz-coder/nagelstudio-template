@@ -14,14 +14,9 @@ test('themes the embed with the studio colours and hides generic details', () =>
   assert.match(script, /hide_event_type_details=1/);
 });
 
-test('the booking button opens Calendly as an in-page popup', () => {
-  assert.match(html, /id="cal-popup"/);
-  assert.match(script, /initPopupWidget/);
-});
-
-test('the booking button is a real link that works without JavaScript', () => {
-  assert.match(html, /id="cal-popup"[^>]*target="_blank"[^>]*rel="noopener"/);
-  assert.match(html, /id="cal-popup"[^>]*href="https:\/\/calendly\.com\/julian-salewicz\/30min"/);
+test('embeds Calendly as an inline calendar with a config-driven data-url', () => {
+  assert.match(html, /class="calendly-inline-widget" id="calendly"/);
+  assert.match(script, /wrap\.setAttribute\('data-url'/);
 });
 
 test('loads the Calendly widget script dynamically, not inline in the HTML', () => {
@@ -32,11 +27,6 @@ test('loads the Calendly widget script dynamically, not inline in the HTML', () 
 test('a fallback link opens Calendly in a new tab', () => {
   assert.match(html, /id="cal-fallback"[^>]*target="_blank"[^>]*rel="noopener"/);
   assert.match(html, /Terminbuchung öffnen/);
-});
-
-test('only hijacks the click once Calendly has actually loaded', () => {
-  assert.match(script, /window\.Calendly && typeof window\.Calendly\.initPopupWidget === 'function'/);
-  assert.match(script, /event\.preventDefault\(\)/);
 });
 
 test('no Setmore embed or self-built booking form remains', () => {

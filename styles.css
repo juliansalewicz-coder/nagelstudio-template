@@ -264,6 +264,7 @@ h3 { font-size: 1.45rem; }
   .booking-primary-actions .btn, .booking-actions .btn, .cta-actions .btn { width: 100%; text-align: center; }
   .foot-top { grid-template-columns: 1fr; }
   .gallery-grid img { height: 200px; }
+  .calendly-inline-widget { height: 1040px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
